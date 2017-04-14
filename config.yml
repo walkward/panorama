@@ -1,0 +1,19 @@
+development:
+  password: eb5c93d8dc8c6afebd0a8f217f52033a
+  theme_id: "182539151"
+  store: sawderstudio.myshopify.com
+  ignore_files:
+    - Gemfile
+    - Gemfile.lock
+    - README.md
+    - package.json
+    - .sass-cache
+    - .gitignore
+    - .git
+    - Gruntfile.js
+    - compass.rb
+    - /sass
+    - sass/*
+    - /scripts
+    - node_modules
+    - .DS_Store
