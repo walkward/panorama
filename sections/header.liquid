@@ -1,40 +1,23 @@
 <div data-section-id="{{ section.id }}" data-section-type="header-section">
+<div class="site-header--offer">
+  <div class="wrapper">
+    <a href="/shipping"><span class="site-header-shipping">FREE SHIPPING Over $100*</span></a>
+    {% for link in linklists["topbar"].links %}
+      {%- assign child_list_handle = link.title | handleize -%}
+      <a href="{{ link.url }}" class="site-header-toplink">{{ link.title }}</a>
+    {% endfor %}
+  </div>
+</div>
 <header class="site-header site-header--{{ section.settings.menu_style }} {% if section.settings.menu_text_color %}{{ section.settings.menu_text_color }}{% endif %}" role="banner">
       <div class="wrapper">
-        {% if section.settings.logo_max_width != empty and section.settings.logo != blank %}
-          {% capture image_size %}{{ section.settings.logo_max_width | escape }}x{% endcapture %}
-        <style>
-          .site-header__logo {
-            max-width:{{ section.settings.logo_max_width | escape }}px;
-          }
-        </style>
-        {% else %}
-          {% assign image_size = "200x" %}
-          <style>
-          .site-header__logo {
-            max-width: {{ image_size | slice: -1 }}px;
-          }
-        </style>
-        {% endif %}
-
         {% if template.name == 'index' %}
           <h1 class="site-header__logo {% if section.settings.logo %} display-table use-image" style="max-width:{{ image_size | slice: -1 }}px;"{% endif %} itemscope itemtype="http://schema.org/Organization">
         {% else %}
           <div class="h1 site-header__logo {% if section.settings.logo %} display-table use-image" style="max-width:{{ image_size | slice: -1 }}px;"{% endif %} itemscope itemtype="http://schema.org/Organization">
         {% endif %}
-          {% if section.settings.logo %}
-            {% assign logo_inverted_url = section.settings.logo-inverted | img_url: image_size %}
             <a href="/" itemprop="url" class="site-header__logo-link display-table-cell{% if section.settings.logo_use_inverted %} logo--has-inverted{% endif %}">
               {% include 'sawder-studio-logo.svg' %}
             </a>
-            {% if section.settings.logo_use_inverted and section.settings.logo-inverted != blank %}
-              <a href="/" itemprop="url" class="site-header__logo-link display-table-cell logo--inverted">
-                {% include 'snippets/sawder-studio-logo' %}
-              </a>
-            {% endif %}
-          {% else %}
-            <a href="/" itemprop="url" class="site-header__logo-text">{{ shop.name }}</a>
-          {% endif %}
         {% if template.name == 'index' %}
           </h1>
         {% else %}

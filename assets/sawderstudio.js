@@ -1,2 +1,2 @@
 /*! sawderstudio*/
-//------ scripts/main.js
+$(document).ready(function(){});

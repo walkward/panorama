@@ -1,0 +1,17 @@
+.site-header--offer {
+  background: #adc99c;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  font-family: nubian-demibolddemibold;
+  a {
+    color: white;
+    &:hover {
+      color: #222;
+    }
+    &.site-header-toplink {
+      float: right;
+      margin-left: 30px;
+    }
+  }
+}

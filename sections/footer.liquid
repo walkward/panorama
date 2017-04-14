@@ -43,7 +43,7 @@
               <img src="{{ section.settings.footer_logo | img_url: image_size }}" alt="{{ shop.name }}" itemprop="logo">
             </a>
           {% else %}
-            <a href="/" itemprop="url" class="site-header__logo-text">{{ shop.name }}</a>
+            {% include 'sawder-wide-logo.svg' %}
           {% endif %}
         </div>
 
@@ -60,7 +60,8 @@
 
         <div class="copy">
           <p class="text">{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }} <a href="/">{{ shop.name }}</a></p>
-          <p class="powered">{{ powered_by_link }}</p>
+          <p class="text"><a href="/privacy">Privacy | </a></p>
+          <p class="text"><a href="/terms-of-use">Terms & Conditions</a></p>
         </div>
 
         {% assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa,apple_pay' | split: ',' %}
