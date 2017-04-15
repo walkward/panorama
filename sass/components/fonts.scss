@@ -1,15 +1,14 @@
 @font-face {
-    font-family: 'nubian-demibolddemibold';
+    font-family: 'dincomp';
     src: url('dincomp-medium-webfont.woff2') format('woff2'),
          url('dincomp-medium-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
-    font-family: 'merriweatherregular';
-    src: local('merriweatherregular'), local('merriweatherregular'),
-         url('merriweather-regular-webfont.woff2') format('woff2'),
-         url('merriweather-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "din";
+  src: url("DIN.woff2") format("woff2"), /* Modern Browsers */
+    url("DIN.woff") format("woff"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
 }

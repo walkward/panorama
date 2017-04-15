@@ -1,0 +1,11 @@
+{% assign header_title = page.title %}
+{% include 'page_header' with header_title %}
+
+<div class="white">
+  <div class="wrapper wrapper__article">
+    <div class="rte">
+      {% section 'faq' %}
+      {{ page.content }}
+    </div>
+  </div>
+</div>

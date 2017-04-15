@@ -700,7 +700,7 @@ $(timber.init);
 window.theme = window.theme || {};
 
 theme.Header = (function() {
-	
+
 	var cache = {};
 
 	function cacheSelectors() {
@@ -755,7 +755,7 @@ theme.Header = (function() {
 		});
 
 		$('.main-content').fitVids();
-		
+
 		menuStyleCheck();
 		stickyHeader();
 
@@ -819,7 +819,7 @@ function menuStyleCheck() {
 	        fitNav();
 	        timber.cache.$window.on('resize', $.debounce(250, fitNav));
 
-   	 })	
+   	 })
 	};
 }
 
@@ -889,15 +889,10 @@ function dropDownMenus() {
 		var maxW = 0;
 		$(this).find('li').each(function() {
 			$(this).css('position', 'fixed');
-			if ($(this).width() > maxW) {
-				maxW = $(this).width();
-			}
 			$(this).css('position', 'relative');
 		});
-		maxW += 51;
+		maxW += 61;
 		$(this).children('.site-nav__dropdown').css({
-			width: maxW,
-			marginLeft: -maxW/2,
 			display: 'none'
 		});
 	});
@@ -928,7 +923,7 @@ function dropMenu($menu, dir) {
 	    };
  }
 
- 
+
 function unload() {
     if (cache.$body.hasClass('opened-drawer')){
     	cache.$body.removeClass('opened-drawer');
@@ -945,7 +940,7 @@ return {
 window.theme = window.theme || {};
 
 theme.Slideshow = (function(el) {
-	
+
 	this.cache = {
 		$slider: $(el),
 		sliderArgs: {
@@ -983,7 +978,7 @@ theme.Slideshow = (function(el) {
 	if (this.cache.$slider.find('li').length === 1) {
 		this.cache.sliderArgs.touch = false;
 	}
-	
+
 	return this.cache.$slider.flexslider(this.cache.sliderArgs);
 
 });
@@ -996,7 +991,7 @@ theme.HeaderSection = (function() {
   function Header() {
 
   	theme.Header.init();
-    
+
   }
 
   Header.prototype = _.assignIn({}, Header.prototype, {
@@ -1007,7 +1002,7 @@ theme.HeaderSection = (function() {
        theme.Header.onSelect();
     }
   });
- 
+
 
   return Header;
 })();
@@ -1234,7 +1229,7 @@ theme.SlideshowSection.prototype = _.assignIn({}, theme.SlideshowSection.prototy
     	$slideshow.flexslider("pause");
 
     });
-    
+
   },
 
   onBlockDeselect: function() {
@@ -1242,27 +1237,7 @@ theme.SlideshowSection.prototype = _.assignIn({}, theme.SlideshowSection.prototy
     $(this.slideshow).flexslider('play');
   }
 });
-window.theme = window.theme || {};
 
-theme.Kickstarter = (function() {
-
-  function Kickstarter() {
-
-  	theme.crowdCampaign();
-    
-  }
-
-  Kickstarter.prototype = _.assignIn({}, Kickstarter.prototype, {
-    init: function() {
-    	theme.crowdCampaign();
-    },
-    onSelect: function(){
-      theme.crowdCampaign();
-    }
-  });
- 
-  return Kickstarter;
-})();
 window.theme = window.theme || {};
 
 theme.FAQs = (function() {
@@ -1285,11 +1260,11 @@ theme.FAQs = (function() {
       this.$opened.find('.content').slidedown(0);
 
       this.$blocks.find('.title').prepend($.themeAssets.plus + $.themeAssets.minus);
-      
+
       this.$blocks.on('click', function(evt) {
         var blockId = $(evt.target).attr('data-block-id');
         this.focusFAQ(blockId);
-      }); 
+      });
     },
     focusFAQ: function(blockId, isEditorEvent) {
       $accordionItem = $('.section-' + blockId);
@@ -1305,14 +1280,14 @@ theme.FAQs = (function() {
     },
     onBlockSelect: function(evt){
       this.focusFAQ(evt.detail.blockId, true);
-      
+
     },
     onload: function(){
       theme.accordionFAQs(this.$container);
-      
+
     }
   });
- 
+
   return FAQs;
 })();
 
@@ -1324,18 +1299,18 @@ theme.Collection = (function() {
   function Collection() {
 
   	theme.collectionGridMasonry();
-    
+
   }
 
   Collection.prototype = _.assignIn({}, Collection.prototype, {
     init: function() {
     	theme.collectionGridMasonry();
     },
-    onSelect: function(){   	
+    onSelect: function(){
       theme.collectionGridMasonry();
     }
   });
- 
+
   return Collection;
 })();
 
@@ -1385,26 +1360,6 @@ theme.collectionGridMasonry = (function() {
           transitionDuration: 0
         });
       });
-    }
-  });
-
-theme.parallaxBg = (function() {
-    if ( $('.parallax-bg').length > 0 || $('#section-a').length > 0 ) {
-      if ($('#section-a').length > 0) {
-        var $prlxBg = $('#section-a span.prlx-bg'),
-            $prlxTxt = $('#section-a .wrapper').addClass('prlx-txt');
-        $prlxBg.parent().addClass('parallax-bg');
-      } else {
-        var $prlxBg = $('.prlx-bg'),
-            $prlxTxt = $('.prlx-txt');
-      }
-      $(window).on('scroll', function(){
-        if ($(window).scrollTop() < $prlxBg.height()) {
-          $prlxBg.css('transform', 'translate3d(0px, ' + ($(window).scrollTop()/4) + 'px, 0px)');
-          $prlxTxt.css('transform', 'translate3d(0px, ' + ($(window).scrollTop()/8) + 'px, 0px)');
-        }
-      });
-
     }
   });
 
@@ -1555,62 +1510,6 @@ theme.accordionFAQs = (function(el){
     }
   });
 
-theme.crowdCampaign = (function(){
- if ($('.home-kickstarter').length > 0) {
-
-      // PIE
-
-      $('.kickstarter__graphic.pie').html('<canvas id="kickstarter__pie--help" width="110" height="110"></canvas><canvas id="kickstarter__pie" width="110" height="110"></canvas>');
-
-      var progress = 0,
-          pieI = null,
-          pieValue = Math.min( parseInt($('.kickstarter__graphic').data('value')) / 100, 1 ),
-          pieColor = $('.kickstarter__graphic').data('color'),
-          pieCanvas = document.getElementById('kickstarter__pie'),
-          context = pieCanvas.getContext('2d'),
-          centerX = pieCanvas.width / 2,
-          centerY = pieCanvas.height / 2,
-          radius = 45,
-          progress = 0;
-
-      context.lineWidth = 15;
-      context.strokeStyle = pieColor;
-      context.lineCap = 'round';
-
-      pieI = setInterval(function() {
-        progress = progress + 0.0025;
-        context.clearRect(0, 0, pieCanvas.width, pieCanvas.height);
-        context.beginPath();
-        context.arc(centerX, centerY, radius, 0, (2*progress) * Math.PI, false);
-        context.stroke();
-        if (progress >= pieValue) {
-          clearInterval(pieI);
-        }
-      }, 5);
-
-      var pieCanvasHelp = document.getElementById('kickstarter__pie--help'),
-          contextHelp = pieCanvasHelp.getContext('2d'),
-          centerXHelp = pieCanvasHelp.width / 2,
-          centerYHelp = pieCanvasHelp.height / 2,
-          radiusHelp = 45;
-
-      contextHelp.lineWidth = 15;
-      contextHelp.strokeStyle = '#e9e9e9';
-      contextHelp.lineCap = 'round';
-      contextHelp.beginPath();
-      contextHelp.arc(centerXHelp, centerYHelp, radiusHelp, 0, 2 * Math.PI, false);
-      contextHelp.stroke();
-
-      // BAR
-
-      var barValue = Math.min(parseInt($('.kickstarter__graphic.bar').data('value')), 100);
-      $('.kickstarter__graphic.bar').append('<div class="value"></div>');
-      $('.kickstarter__graphic.bar .value').css('width', barValue + '%');
-
-    }
-
-});
-
 $(document).ready(function() {
   var sections = new theme.Sections();
 
@@ -1620,7 +1519,6 @@ $(document).ready(function() {
   sections.register('home-product', theme.Product);
   sections.register('collection-template', theme.Collection);
   sections.register('list-collection-template', theme.Collection);
-  sections.register('home-kickstarter', theme.Kickstarter);
   sections.register('home-faq', theme.FAQs);
 
 
@@ -1663,7 +1561,6 @@ $(document).ready(function() {
 
 theme.init = function() {
   theme.cacheSelectors();
-  theme.parallaxBg();
   theme.customSelectorArrow();
   theme.quantityButtons();
   theme.passwordFooter();
@@ -1671,11 +1568,6 @@ theme.init = function() {
   theme.homeGallery();
   theme.iframePopUp();
 
-  if (theme.cache.$body.hasClass('template-index')) {
-      if ( ($('.main-content').children('.index-sections').children('.shopify-section').length % 2) != 0 ) {
-        $('.social-footer').addClass('even');
-      }
-    }
 
 };
 $(theme.init);

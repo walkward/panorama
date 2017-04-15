@@ -12,7 +12,7 @@
             {% unless block.settings.link == blank %}
               <a href="{{ block.settings.link }}" class="slide-link slide-link--{{ block.id }}">
             {% endunless %}
-                <img src="{{ block.settings.image | img_url: '1024x' }}" alt="{{ block.settings.image.alt | escape }}" id="slide-{{ block.id }}" data-retina-src="{{ block.settings.image | img_url: '1024x' | scale: 2 }}" class="retina-img">
+                <img src="{{ block.settings.image | img_url: '1024x400', format: 'pjpg', crop: 'center' }}" alt="{{ block.settings.image.alt | escape }}" id="slide-{{ block.id }}" data-retina-src="{{ block.settings.image | img_url: '1024x400', format: 'pjpg', crop: 'center' | scale: 2 }}" class="retina-img">
             {% unless block.settings.link == blank %}
               </a>
             {% endunless %}

@@ -16,21 +16,10 @@
 %}
   {%- assign social_icons = true -%}
 {% endif %}
-{% if social_icons %}
-      <aside class="social-footer">
-        <div class="wrapper display-table">
-          <div class="display-table-cell">
-            <ul class="inline-list social-icons">
-              {% include 'footer_social-icons' %}
-            </ul>
-          </div>
-        </div>
-      </aside>
-    {% endif %}
 
     <footer class="site-footer small--text-center" role="contentinfo">
 
-      <div class="wrapper text-center">
+      <div class="wrapper text-center white">
 
         <div class="h1 footer__logo" itemscope itemtype="http://schema.org/Organization">
           {% if section.settings.footer_logo != blank %}
@@ -47,8 +36,6 @@
           {% endif %}
         </div>
 
-        {% include 'newsletter' %}
-
         {% if section.settings.footer_linklist %}
           <div class="link-list">
             {% for link in linklists[section.settings.footer_linklist].links %}
@@ -63,6 +50,18 @@
           <p class="text"><a href="/privacy">Privacy | </a></p>
           <p class="text"><a href="/terms-of-use">Terms & Conditions</a></p>
         </div>
+
+        {% if social_icons %}
+              <aside class="social-footer">
+                <div class="wrapper display-table">
+                  <div class="display-table-cell">
+                    <ul class="inline-list social-icons">
+                      {% include 'footer_social-icons' %}
+                    </ul>
+                  </div>
+                </div>
+              </aside>
+            {% endif %}
 
         {% assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa,apple_pay' | split: ',' %}
         {% if section.settings.footer_payment_enable and shop.enabled_payment_types != empty %}

@@ -51,14 +51,6 @@
 
     {% endif %}
 
-    <form action="/search" method="get" class="search-bar text-center" role="search">
-      <h2 class="home-section-title less-margin">{{ 'general.search.label' | t }}</h2>
-      <input type="search" name="q" value="{{ search.terms | escape }}">
-      <button type="submit" class="btn btn--regular btn--dark btn--fill">
-        {{ 'general.search.submit' | t }}
-      </button>
-    </form>
-
   {% endpaginate %}
 
 {% endunless %}

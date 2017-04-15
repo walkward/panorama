@@ -27,7 +27,7 @@
     {% endif %}
   </a>
 
-  <p class="h3"><a href="{{ product.url | within: collection }}">{{ product.title }}</a></p>
+  <p class="h3"><a href="{{ product.url | within: collection }}">{{ product.title | truncatewords: 5 }}</a></p>
 
   <p class="price">
 

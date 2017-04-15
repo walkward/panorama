@@ -1,9 +1,9 @@
 .site-header--offer {
   background: #adc99c;
-  height: 40px;
+  height: 35px;
   line-height: 40px;
-  font-size: 18px;
-  font-family: nubian-demibolddemibold;
+  font-size: 16px;
+  font-family: dincomp;
   a {
     color: white;
     &:hover {
@@ -13,5 +13,11 @@
       float: right;
       margin-left: 30px;
     }
+  }
+}
+
+.animate {
+  .site-nav {
+    opacity: 1 !Important;
   }
 }

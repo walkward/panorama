@@ -1,29 +1,37 @@
 {% assign header_title = article.title %}
 {% include 'page_header' with header_title %}
 
-<div class="wrapper wrapper--margins wrapper--mini">
+<article itemscope itemtype="http://schema.org/Article">
 
-  <article itemscope itemtype="http://schema.org/Article">
+  <div class="white">
 
-    <div class="article__content rte" itemprop="articleBody">
-      {{ article.content }}
-    </div>
+    <div class="wrapper wrapper--margins wrapper--mini">
 
-    {% if section.settings.blog_sharing_enabled or section.settings.blog_rss_enabled %}
-
-      <div class="article__sharing">
-
-        {% if section.settings.blog_sharing_enabled %}
-          {% include 'page_share' %}
-        {% endif %}
-
-        {% if section.settings.blog_rss_enabled %}
-          <div class="subscribe-link"><span class="label">{{ 'general.sharing.rss_subscribe' | t }}</span><a href="{{ blog.url }}.atom" target="_blank">{% include 'asset_svg' with 'rss' %}</a></div>
-        {% endif %}
-
+      <div class="article__content rte" itemprop="articleBody">
+        {{ article.content }}
       </div>
 
-    {% endif %}
+      {% if section.settings.blog_sharing_enabled or section.settings.blog_rss_enabled %}
+
+        <div class="article__sharing">
+
+          {% if section.settings.blog_sharing_enabled %}
+            {% include 'page_share' %}
+          {% endif %}
+
+          {% if section.settings.blog_rss_enabled %}
+            <div class="subscribe-link"><span class="label">{{ 'general.sharing.rss_subscribe' | t }}</span><a href="{{ blog.url }}.atom" target="_blank">{% include 'asset_svg' with 'rss' %}</a></div>
+          {% endif %}
+
+        </div>
+
+      {% endif %}
+
+    </div>
+
+  </div>
+
+  <div class="wrapper wrapper--margins wrapper--mini">
 
     {% if blog.comments_enabled? %}
 
@@ -131,9 +139,10 @@
 
     {% endif %}
 
-  </article>
+  </div>
 
-</div>
+</article>
+
 
 {% schema %}
   {

@@ -145,10 +145,10 @@ $zindexDrawer: 10;
 
 /* -- Typography -- */
 
-$headerFontStack: 'nubian-demibolddemibold';
+$headerFontStack: 'dincomp';
 $headerFontWeight: 700;
 
-$bodyFontStack: 'merriweatherregular';
+$bodyFontStack: 'din';
 $baseFontSize: 14px;
 
 /*!
@@ -250,7 +250,7 @@ $baseFontSize: 14px;
   :-ms-input-placeholder      {@content}
 }
 
-$button-size: 28px;
+$button-size: 18px;
 @mixin line {
   display: inline-block;
   width: $button-size;
@@ -320,7 +320,7 @@ $button-size: 28px;
     width: 45px;
     height: 3px;
     background: $colorPrimary;
-    margin-top: 25px;
+    margin-top: 10px;
   }
   .text-center &:after {
     margin-left: auto;
@@ -860,6 +860,9 @@ select {
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
+  &:focus {
+    ouline: none;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -882,9 +885,9 @@ a {
 /* -- Headings -- */
 
 h1 {
-  font-size: em(40px);
+  font-size: em(28px);
   @include at-query($max, $medium) {
-    font-size: em(32px);
+    font-size: em(24px);
   }
   @include at-query($max, $small) {
     font-size: em(22px);
@@ -1104,8 +1107,12 @@ body {
 .main-content {
   display: block;
   overflow: hidden;
+  width: 100%;
   .template-password & {
     overflow: visible;
+  }
+  @include at-query($max, $small) {
+    margin-top: 70px
   }
 }
 
@@ -1121,24 +1128,10 @@ body {
 
   &.wrapper--margins {
 
-    padding: 120px 0 150px;
+    padding: 60px 0 70px;
 
     + .wrapper--margins {
       padding-top: 0;
-    }
-
-    // First homepage section has much more padding
-    .index-sections > .shopify-section:first-child & {
-
-      padding: 280px 0;
-
-      @include at-query($max, $medium) {
-        padding: 180px 0;
-      }
-      @include at-query($max, $small) {
-        padding: 150px 0 40px;
-      }
-
     }
 
     // Some sections don't have padding at all
@@ -1174,7 +1167,7 @@ body {
     margin: 0 100px;
 
     &.wrapper--margins {
-      padding: 120px 0 150px;
+      padding: 60px 0 70px;
     }
   }
 
@@ -1184,7 +1177,7 @@ body {
     }
 
     &.wrapper--margins {
-      padding: 80px 0 110px;
+      padding: 60px 0 70px;
     }
   }
 
@@ -1208,9 +1201,15 @@ body {
   z-index: 9999;
   width: 100%;
   height: 90px;
+  background: white;
+  border-bottom: 1px solid #f1f1f1;
 
   .wrapper {
     height: 100%;
+    z-index: 100;
+    @include at-query($max, $small) {
+      margin-left: 10px !important;
+    }
   }
 
   // Sticky variation
@@ -1237,7 +1236,15 @@ body {
   // Mobile variation
   &.mobile {
     @include translate3d(0, 0, 0);
-    height: 70px;
+    height: 50px;
+    .site-header__logo {
+      height: 50px !important;
+      .site-header__logo-link svg {
+        max-height: 40px !important;
+        visibility: visible !important;
+        width: 110px !important;
+      }
+    }
   }
 
 }
@@ -1246,9 +1253,16 @@ body {
 
 .site-header__logo {
 
+  .site-header__logo-link svg {
+    max-height:69px;
+    width:175px;
+    vertical-align: middle;
+    visibility: visible !important;
+  }
+
   text-align: left;
   margin: 0 auto !important;
-  max-width: 400px;
+  max-width: 200px;
   font-size: em(26px);
   position: absolute;
   left: 0;
@@ -1349,13 +1363,12 @@ body {
 
 .header__custom {
 
-  background: $colorBodyAlt;
   text-align: center;
-  padding-top: 50px;
 
   h1 {
     margin: 0;
-
+    text-transform: lowercase;
+    letter-spacing: -1px;
   }
 
   hr {
@@ -1378,33 +1391,6 @@ body {
     }
   }
 
-}
-
-// Parallax functions
-
-.parallax-bg {
-  position: relative;
-  overflow: hidden;
-}
-.prlx-bg {
-
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  @include bgimg();
-
-  img {
-    display: none;
-  }
-
-}
-.prlx-txt {
-  z-index: 99;
-  position: relative;
 }
 
 
@@ -1436,17 +1422,15 @@ body {
   li {
 
     float: left;
-    font: em(13px)/1 $headerFontStack;
-    text-transform: uppercase;
+    font: em(16px)/1 $headerFontStack;
     position: relative;
 
     margin: 0 15px;
-    &:last-child {
+    &.btn__cart {
       margin-right: 0;
     }
-
     a, .btn__account a {
-      @include islight(#fff, #000);
+      @include islight(#fff, #222);
       padding: 5px;
       position: relative;
       @extend %coloranim;
@@ -1565,6 +1549,10 @@ body {
         left: 0;
         display: block;
         width: 20px;
+        font-family: Trebuchet MS;
+        font-weight: 600;
+        line-height: 14px;
+        font-size: 11px;
       }
 
       svg {
@@ -1628,7 +1616,7 @@ body {
     }
 
     @include at-query($max, $medium) {
-      padding: 60px;
+      padding: 20px;
     }
     @include at-query($max, 370px) {
       width: 100%;
@@ -1673,8 +1661,6 @@ body {
         position: relative;
         width: 100%;
         height: 60px;
-        border-top: 1px solid #343434;
-        border-bottom: 1px solid #343434;
         margin: 0 auto -1px;
 
         a {
@@ -1780,7 +1766,7 @@ body {
 
 .lines-button {
   display: inline-block;
-  padding: 22px;
+  padding: 5px;
   transition: .3s;
   cursor: pointer;
 
@@ -1789,8 +1775,8 @@ body {
   right: 0;
   z-index: 999999;
   background: $colorDrawers;
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 49px;
 
   &:active {
     transition: 0;
@@ -1813,8 +1799,8 @@ body {
     @include prefixer(transform-original, $button-size/14 center, webkit ms spec)
   }
 
-  &:before { top: $button-size/4; }
-  &:after { top: -$button-size/4; }
+  &:before { top: $button-size/3; }
+  &:after { top: -$button-size/3; }
 
 }
 
@@ -1849,39 +1835,26 @@ body {
     position: absolute;
     top: 20px;
     left: 50%;
-    width: 100px;
+    width: 160px;
     height: auto;
     margin-left: -50px;
     padding-top: 5px;
-    text-align: center;
+    text-align: left;
 
     > div {
-      background: #eee;
-      padding: 12px 25px 10px;
-      border-radius: 3px;
+      background: #fff;
+      padding: 12px 15px 10px;
+      border-radius: 1px;
+      border: solid #eee 1px;
       position: relative;
       top: 5px;
-    }
-
-    .arrow {
-      top: 0;
-      left: 50%;
-      border: solid transparent;
-      content: " ";
-      height: 0;
-      width: 0;
-      position: absolute;
-      pointer-events: none;
-      border-color: rgba(238, 238, 238, 0);
-      border-bottom-color: #eee;
-      border-width: 5px;
-      margin-left: -5px;
     }
 
     li {
 
       a {
         @include islight(#000, #000);
+        font-size: 0.7em;
       }
 
       a:hover {
@@ -1942,7 +1915,7 @@ body.opened-drawer {
 
   background-color: $colorFooterBg;
   color: $colorFooterText;
-  padding: 120px 0;
+  padding: 1.5em 0 0 0;
 
   a {
     color: $colorFooterText;
@@ -1953,7 +1926,7 @@ body.opened-drawer {
 
   .site-header__logo {
     position: static;
-    max-width: 400px;
+    max-width: 200px;
     a {
       margin: auto;
       &.site-header__logo-link {
@@ -1995,16 +1968,20 @@ body.opened-drawer {
       &:first-child:after {
         content: ".";
       }
-      @include at-query($max, $small) {
-        display: block;
-        margin: 0;
-        &:first-child:after {
-          content: "";
-        }
-      }
     }
   }
-
+  .footer__logo {
+    margin: 0.5em 0;
+  }
+  @include at-query($max, $small) {
+  padding-bottom: 0px !important;
+    .copy {
+      font-size: 0.7em;
+    }
+    >.wrapper {
+      margin: 0px;
+    }
+  }
 }
 
 .pay-icons {
@@ -2016,14 +1993,9 @@ body.opened-drawer {
 }
 
 .social-footer {
-  background-color: $colorBodyAlt;
-
-  &.even {
-    background-color: $colorBody;
-  }
 
   text-align: center;
-  padding: 20px;
+  padding: 10px;
 
   .wrapper {
     margin: auto !important;
@@ -2031,15 +2003,9 @@ body.opened-drawer {
 
 }
 
-@include at-query($min, $medium) {
-  .social-footer {
-    min-height: 120px;
-  }
-}
-
 @include at-query($max, $medium) {
   .site-footer {
-    padding: 60px 0 50px;
+    padding: 40px 0 20px;
   }
 }
 
@@ -2055,7 +2021,7 @@ body.opened-drawer {
   cursor: default;
 
   svg * {
-    fill: $colorSecondary;
+    fill: $colorFooterText;
   }
 
   a:hover svg * {
@@ -2064,6 +2030,19 @@ body.opened-drawer {
 
   svg.google path {
     fill: $colorBodyAlt;
+  }
+}
+.newsletter-title,
+.newsletter {
+  display: inline-block;
+}
+
+.newsletter-title {
+  font-size: 20px;
+  span {
+    vertical-align: middle;
+    line-height: 50px;
+    padding-right: 8px;
   }
 }
 
@@ -2458,7 +2437,7 @@ select {
   border: 1px solid darken($colorBorder, 12%);
   max-width: 100%;
   padding: 8px 20px;
-  border-radius: 2px;
+  border-radius: 1px;
   height: 50px;
   font-size: 16px;
   color: $colorText;
@@ -2650,12 +2629,11 @@ label.error {
 
   width: calc(100% + 30px);
   margin-left: -15px;
-  margin-top: 10px;
   @include clearfix();
 
   .form__column, .selector-wrapper {
 
-    padding: 0 15px 30px;
+    padding: 0 15px 15px;
     float: left;
 
     &.third {
@@ -2890,8 +2868,8 @@ label {
 }
 
 .svg.social {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
 }
 
 /*!
@@ -2991,18 +2969,13 @@ $color-blankstate-background: rgba(color-control($colorBodyAlt), 0.1);
   position: relative;
   @include clearfix();
 
-  &:nth-child(odd) {
-    background: $colorBodyAlt;
-  }
-
  }
 }
 // Section titles
 .home-section-title {
 
   font-size: em(18px);
-  text-transform: uppercase;
-  margin-bottom: 90px;
+  margin-bottom: 30px;
 
   @include at-query($max, 1025px) {
 
@@ -3056,266 +3029,6 @@ hr.thin-line {
     left: 8%;
     top: 50%;
     margin-top: -80px;
-  }
-}
-
-/*!
- *  3.2. Crowdfunding (kickstarter)
-*/
-
-.home-kickstarter {
-
-  @include bgimg();
-
-  // Typography
-
-  h2 {
-
-    font-size: em(40px);
-    .home-section:first-child & {
-      font-size: em(54px);
-    }
-
-    line-height: 1.2;
-    margin-bottom: 30px;
-
-  }
-
-  h3 {
-    font-size: em(16px);
-    line-height: 1.6;
-    color: $colorText;
-    max-width: 40%;
-    @include at-query($max, 1025px) {
-      max-width: 70%;
-    }
-    @include at-query($max, $medium) {
-      max-width: 100%;
-    }
-  }
-
-  // Responsie tweaks
-
-  @include at-query($max, $medium) {
-
-    text-align: center;
-
-    .prlx-bg {
-      position: relative;
-      background-image: none;
-      img {
-        display: block;
-      }
-    }
-
-    h2 {
-      font-size: em(32px) !important;
-    }
-
-  }
-
-  @include at-query($max, $small) {
-
-    h2 {
-      font-size: em(22px) !important;
-    }
-    h3 {
-      font-size: em(14px);
-      line-height: 1.5;
-    }
-
-  }
-
-}
-
-// Project meta
-
-.kickstarter__meta {
-
-  margin: 30px 0 45px;
-  position: relative;
-
-  @include at-query($max, $medium) {
-    margin: 30px auto;
-    ul {
-      padding-top: 30px;
-    }
-  }
-
-  ul {
-    margin: 0;
-    @include clearfix();
-  }
-
-  li {
-
-    float: left;
-    margin-left: 50px;
-    &:first-child {
-      margin-left: 0;
-    }
-
-    @include at-query($max, $medium) {
-      float: none;
-      display: inline-block;
-    }
-    @include at-query($max, $small) {
-      margin-left: 30px;
-    }
-
-  }
-
-  strong {
-    display: block;
-    font-family: $headerFontStack;
-  }
-  span {
-    display: block;
-    color: $colorSubtitle;
-    font-size: em(13px);
-    line-height: 1;
-  }
-
-  .kickstarter__graphic {
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-   // Pie version
-    &.pie {
-
-      width: 55px;
-      height: 55px;
-
-      canvas {
-        @include prefixer(transform, rotate(-90deg) scale(0.5), webkit ms spec);
-        @include prefixer(transform-origin, 20% 40%, webkit ms spec);
-        position: absolute;
-        top: 2px;
-        left: 0;
-      }
-
-    }
-
-    // Bar version
-    &.bar {
-
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 13px;
-      border-radius: 10px;
-      width: 100%;
-      max-width: 400px;
-      background: rgba(0, 0, 0, .1);
-
-      .value {
-
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 13px;
-        border-radius: 10px;
-        background: $colorPrimary;
-        transition: width 500ms linear;
-
-      }
-
-      @include at-query($max, $medium) {
-        position: relative;
-        left: 50%;
-        margin-left: -200px;
-      }
-      @include at-query($max, $small) {
-        left: 0;
-        margin-left: 0;
-        max-width: none;
-      }
-
-    }
-
-  }
-
-  // Pie version
-  &.kickstarter--pie {
-
-    padding-left: 90px;
-
-    strong {
-      font-size: em(24px);
-    }
-    span {
-      margin-top: -3px;
-    }
-
-    .kickstarter__graphic.bar {
-      display: none;
-    }
-
-    @include at-query($max, $medium) {
-      padding-left: 0;
-      .kickstarter__graphic.bar {
-        display: block;
-      }
-      .kickstarter__graphic.pie {
-        display: none;
-      }
-    }
-
-  }
-
-  // Bar version
-  &.kickstarter--bar {
-
-    padding-top: 45px;
-    margin-top: 55px;
-    max-width: 410px;
-
-    strong {
-      font-size: em(40px);
-    }
-    span {
-      margin-top: 2px;
-    }
-
-    @include at-query($max, $medium) {
-      padding-top: 0;
-    }
-    @include at-query($max, $small) {
-      strong {
-        font-size: em(20px);
-      }
-    }
-
-    .kickstarter__graphic.pie {
-      display: none;
-    }
-
-  }
-
-}
-
-// No image text alignment
-
-@include at-query($min, $medium) {
-  .text-center {
-    .kickstarter__meta {
-      margin: 30px auto;
-      display: inline-block;
-    }
-    .btn {
-      display: table;
-      margin: auto;
-    }
-  }
-}
-
-.kickstarter__content.text-center {
-  h3, .kickstarter--bar {
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
@@ -3804,6 +3517,7 @@ hr.thin-line {
 */
 
 .jumpstart-accordion {
+  padding-bottom: 60px;
 
   h3 {
 
@@ -3913,7 +3627,7 @@ hr.thin-line {
 .home-features.columns-i {
   text-align: center;
   .home-section-title:after {
-    margin: 25px auto 0;
+    margin: 10px auto 0;
   }
 }
 
@@ -4050,7 +3764,7 @@ hr.thin-line {
 .blog-list {
   @include clearfix();
   + p {
-    margin: 115px 0 0 0;
+    margin: 60px 0 0 0;
   }
 }
 
@@ -4131,6 +3845,20 @@ hr.thin-line {
     display: none;
   }
 
+}
+.template-blog .article:nth-child(even) {
+  padding-right: 440px;
+}
+.article:nth-child(even) {
+  padding-left: 70px;
+  padding-right: 290px;
+  .display-table-cell {
+    text-align: right;
+  }
+  .article__img {
+    right: 0;
+    left: auto;
+  }
 }
 
 // Content
@@ -4393,7 +4121,7 @@ hr.thin-line {
 }
 
 #Comments {
-  margin-top: 140px;
+
   @extend %custom-divider;
 }
 .comments-list {
@@ -4512,11 +4240,12 @@ hr.thin-line {
   .price {
 
     font-weight: 400;
-    font-size: em(24px);
+    font-size: em(16px);
     font-family: $headerFontStack;
     color: lighten($colorSubtitle, 10%);
     line-height: 1;
     margin-top: 10px;
+    margin-bottom: 0px;
 
     .compare-price {
       text-decoration: line-through;

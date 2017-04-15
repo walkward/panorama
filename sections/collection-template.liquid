@@ -2,7 +2,9 @@
 {% assign header_title = collection.title %}
 {% include 'page_header' with header_title %}
 
-<div class="wrapper wrapper--margins">
+{% include 'collection-sidebar' %}
+
+<div class="wrapper wrapper-with-sidebar">
 
   {% if collection.image %}
     <div class="collection-image">
@@ -69,7 +71,7 @@
             </div>
           {% else %}
             <div class="grid__item">
-              <p><em>{{ 'collections.general.no_matches' | t }}</em></p>
+              <p>{{ 'collections.general.no_matches' | t }}</p>
             </div>
           {% endif %}
 

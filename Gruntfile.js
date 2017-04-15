@@ -1,7 +1,8 @@
 module.exports = function(grunt) {
   // The order of JS files that get loaded
   var jsBuildFiles = ['scripts/plugins/*.js',
-                      'scripts/main.js'];
+                      'scripts/main.js',
+                    'scripts/lib/*.js'];
 
   // Project configuration.
   grunt.initConfig({
