@@ -861,7 +861,7 @@ select {
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   &:focus {
-    ouline: none;
+    outline: none;
   }
 }
 
@@ -895,9 +895,9 @@ h1 {
 }
 
 h2 {
-  font-size: em(34px);
+  font-size: em(26px);
   @include at-query($max, $medium) {
-    font-size: em(28px);
+    font-size: em(24px);
   }
   @include at-query($max, $small) {
     font-size: em(22px);
@@ -912,7 +912,7 @@ h3 {
 }
 
 h4 {
-  font-size: em(18px);
+  font-size: em(16px);
 }
 
 h5 {
@@ -1112,7 +1112,7 @@ body {
     overflow: visible;
   }
   @include at-query($max, $small) {
-    margin-top: 70px
+    margin-top: 50px
   }
 }
 
@@ -1187,7 +1187,7 @@ body {
     }
 
     &.wrapper--margins {
-      padding: 60px 0 50px;
+      padding: 20px 0px;
     }
   }
 }
@@ -1915,7 +1915,7 @@ body.opened-drawer {
 
   background-color: $colorFooterBg;
   color: $colorFooterText;
-  padding: 1.5em 0 0 0;
+  //padding: 1.5em 0 0 0;
 
   a {
     color: $colorFooterText;
@@ -2005,7 +2005,7 @@ body.opened-drawer {
 
 @include at-query($max, $medium) {
   .site-footer {
-    padding: 40px 0 20px;
+    padding: 0px 0 20px;
   }
 }
 
@@ -2043,6 +2043,12 @@ body.opened-drawer {
     vertical-align: middle;
     line-height: 50px;
     padding-right: 8px;
+    @include at-query($max, $medium) {
+      line-height: 30px;
+      padding-right: 8px;
+      margin-bottom: 10px;
+      display: block;
+    }
   }
 }
 
@@ -2057,8 +2063,7 @@ body.opened-drawer {
 }
 @include at-query($max, $small) {
   .newsletter__label, .newsletter__input {
-
-     margin: 0 0 30px 0;
+     margin: 0;
   }
 }
 
@@ -2698,7 +2703,7 @@ label {
 .btn {
 
   font-family: $headerFontStack;
-  border-radius: 2px;
+  border-radius: 1px;
   display: inline-block;
   @extend %coloranim;
 
@@ -2714,11 +2719,6 @@ label {
     height: 50px;
     line-height: 48px;
     padding: 0 30px;
-
-    &.newsletter__submit {
-      // fix padding
-      padding: 0px;
-    }
 
     @include at-query($max, $small) {
       &:not([type="submit"]) {
@@ -2861,10 +2861,6 @@ label {
     display: block;
   }
 
-}
-
-.contact-form {
-  margin-top: 70px;
 }
 
 .svg.social {
@@ -3644,13 +3640,17 @@ hr.thin-line {
 
 .clients-list {
 
-  padding: 25px 0;
-
   li {
-    height: 100%;
+    height: 60%;
     text-align: center;
     position: relative;
     margin-bottom: 0;
+    @include at-query($min, $medium){
+      margin-bottom: -30px;
+    }
+    .dummy-holder {
+      padding-top: 60%;
+    }
   }
 
 }
@@ -4194,8 +4194,19 @@ hr.thin-line {
 }
 
 .collection-list {
+  @include at-query($max, $medium) {
+    margin-left: 0px !important;
+  }
   .product {
-    padding-bottom: 50px;
+    padding: 0 0 2% 2%;
+    box-sizing: border-box;
+    float: left;
+    min-height: 1px;
+    vertical-align: top;
+
+    @include at-query($max, $medium) {
+      padding: 0;
+    }
 
     > a {
       background: $colorBodyAlt;
@@ -4214,13 +4225,29 @@ hr.thin-line {
     .badge--sold-out  {
       background: #999;
     }
+    @include at-query($max, $medium) {
+      width: 50%;
+    }
+    @include at-query($max, $small) {
+      width: 100%;
+    }
+    @include at-query($min, $medium) {
+      width: 33.333%;
+    }
+    @include at-query($min, 1400px) {
+      width: 25%;
+    }
+    @include at-query($min, 1600px) {
+      width: 20%;
+    }
+
   }
 
   h3 {
 
     font-size: em(16px);
     font-family: $bodyFontStack;
-    margin: 35px 0 -2px;
+    margin: 15px 0 -2px;
 
     a {
       color: $colorTitle;
@@ -4245,6 +4272,7 @@ hr.thin-line {
     color: lighten($colorSubtitle, 10%);
     line-height: 1;
     margin-top: 10px;
+    padding-bottom: 15px;
     margin-bottom: 0px;
 
     .compare-price {
@@ -4298,6 +4326,7 @@ hr.thin-line {
 /* -- Product differences -- */
 
 .product {
+  transition: width 0.4s, height 0.4s;
 
   @include clearfix();
 
@@ -4347,7 +4376,7 @@ hr.thin-line {
 }
 
 .product .home-section-title, .home-section-title.less-margin {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .product-description {
@@ -4728,9 +4757,6 @@ hr.thin-line {
   margin-top: 60px;
 }
 
-.cart__subtotal-holder {
-  margin-bottom: 45px;
-}
 .cart__subtotal-title {
   font-weight: 600;
   font-size: em(16px);
@@ -4954,7 +4980,6 @@ hr.thin-line {
       min-width: 125px;
       margin: auto;
       display: block;
-      margin-top: 75px;
     }
 
   }

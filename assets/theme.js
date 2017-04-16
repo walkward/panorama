@@ -1291,6 +1291,96 @@ theme.FAQs = (function() {
   return FAQs;
 })();
 
+window.theme = window.theme || {};
+
+theme.Filters = (function() {
+  var constants = {
+    SORT_BY: 'sort_by'
+  };
+  var selectors = {
+    filterSelection: '.filters-toolbar__input--filter',
+    sortSelection: '.filters-toolbar__input--sort',
+    defaultSort: '.collection-header__default-sort'
+  };
+
+  function Filters(container) {
+    var $container = this.$container = $(container);
+
+    this.$filterSelect = $(selectors.filterSelection, $container);
+    this.$sortSelect = $(selectors.sortSelection, $container);
+    this.$selects = $(selectors.filterSelection, $container).add($(selectors.sortSelection, $container));
+
+    this.defaultSort = this._getDefaultSortValue();
+    this._resizeSelect(this.$selects);
+    this.$selects.removeClass('hidden');
+
+    this.$filterSelect.on('change', this._onFilterChange.bind(this));
+    this.$sortSelect.on('change', this._onSortChange.bind(this));
+  }
+
+  Filters.prototype = _.assignIn({}, Filters.prototype, {
+    _onSortChange: function(evt) {
+      var sort = this._sortValue();
+      if (sort.length) {
+        window.location.search = sort;
+      } else {
+        // clean up our url if the sort value is blank for default
+        window.location.href = window.location.href.replace(window.location.search, '');
+      }
+      this._resizeSelect($(evt.target));
+    },
+
+    _onFilterChange: function(evt) {
+      window.location.href = this.$filterSelect.val() + window.location.search;
+      this._resizeSelect($(evt.target));
+    },
+
+    _getSortValue: function() {
+      return this.$sortSelect.val() || this.defaultSort;
+    },
+
+    _getDefaultSortValue: function() {
+      return $(selectors.defaultSort, this.$container).val();
+    },
+
+    _sortValue: function() {
+      var sort = this._getSortValue();
+      var query = '';
+
+      if (sort !== this.defaultSort) {
+        query = constants.SORT_BY + '=' + sort;
+      }
+
+      return query;
+    },
+
+    _resizeSelect: function($selection) {
+      $selection.each(function() {
+        var $this = $(this);
+        var arrowWidth = 10;
+        // create test element
+        var text = $this.find('option:selected').text();
+        var $test = $('<span>').html(text);
+
+        // add to body, get width, and get out
+        $test.appendTo('body');
+        var width = $test.width();
+        $test.remove();
+
+        // set select width
+        $this.width(width + arrowWidth);
+      });
+    },
+
+    onUnload: function() {
+      this.$filterSelect.off('change', this._onFilterChange);
+      this.$sortSelect.off('change', this._onSortChange);
+    }
+  });
+
+  return Filters;
+})();
+
 /* ================ TEMPLATES ================ */
 window.theme = window.theme || {};
 
@@ -1356,8 +1446,10 @@ theme.collectionGridMasonry = (function() {
       if ( (typeof $.fn.packery !== 'undefined') && ($('.collection-list').length > 0) ) {
       $('.collection-list').imagesLoaded(function() {
         $('.collection-list').packery({
+          columnWidth: $('.collection-list').find('.product')[0],
           itemSelector: '.product',
-          transitionDuration: 0
+          transitionDuration: '0.4s',
+          percentPosition: true
         });
       });
     }
@@ -1516,6 +1608,7 @@ $(document).ready(function() {
   sections.register('header-section', theme.HeaderSection);
   sections.register('slideshow-section', theme.SlideshowSection);
   sections.register('product', theme.Product);
+  sections.register('collection-template', theme.Filters);
   sections.register('home-product', theme.Product);
   sections.register('collection-template', theme.Collection);
   sections.register('list-collection-template', theme.Collection);

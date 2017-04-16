@@ -53,3 +53,22 @@
   max-width: 600px;
   margin: 0 auto;
 }
+
+#newsletter-popup {
+  background-size: cover;
+  max-width: 500px;
+  height: 450px;
+  position: relative;
+  .newsletter-popup-wrapper {
+    padding: 0 10px 0px 20px;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    bottom: 45px;
+    left: 0px;
+    text-align: center;
+  }
+  .mfp-close {
+    color: white;
+  }
+}

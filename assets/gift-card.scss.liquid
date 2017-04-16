@@ -17,7 +17,7 @@ $colorBody: {{ settings.color_body_bg }};
 $colorBorder: {{ settings.color_borders }};
 
 // Gift Card Colors
-$colorGiftText: #999; 
+$colorGiftText: #999;
 $colorGiftBorder: {{ settings.color_body_bg_alt }};
 
 // Sizes
@@ -408,11 +408,16 @@ body {
 $colorBtnPrimary: {{ settings.color_primary }};
 $colorBtnPrimaryHover: darken($colorBtnPrimary, 10%);
 
-.btn {  
+.btn {
 
   font-family: $headerFontStack;
-  border-radius: 3px;
+  border-radius: 1px;
   display: inline-block;
+
+  &:focus {
+    outline: none;
+  }
+
   @extend %coloranim;
 
   &.btn--regular {

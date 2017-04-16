@@ -43,18 +43,18 @@
       {% endif %}
 
       <div class="product grid__item {{ grid_item_width }} text-center">
+        <div class="white">
+          <a href="{{ collection.url }}" class="grid__image">
+          {% if use_placeholder %}
+            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+            {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+            {% else %}
+            <img class="retina-img" src="{{ collection_image }}" data-retina-src="{{ collection_image_x2 }}" alt="{{ collection_alt }}">
+          {% endif %}
+          </a>
 
-        <a href="{{ collection.url }}" class="grid__image">
-        {% if use_placeholder %}
-          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-          {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-          {% else %}
-          <img class="retina-img" src="{{ collection_image }}" data-retina-src="{{ collection_image_x2 }}" alt="{{ collection_alt }}">
-        {% endif %}
-        </a>
-
-        <p class="h3"><a href="{{ collection.url }}">{{ collection.title }}</a></p>
-
+          <p class="h3"><a href="{{ collection.url }}">{{ collection.title }}</a></p>
+        </div>
       </div>
 
     {% endfor %}

@@ -1,2 +1,47 @@
 <!-- Popup itself -->
-<div id="newsletter-popup" class="white-popup mfp-with-anim mfp-hide">You may put any HTML here. This is dummy copy. It is not meant to be read. It has been placed here solely to demonstrate the look and feel of finished, typeset text. Only for show. He who searches for meaning here will be sorely disappointed.</div>
+{% for block in section.blocks %}
+  <div id="newsletter-popup" class="white-popup mfp-with-anim mfp-hide" style="background-image:url('{{ block.settings.image | img_url: '500x', format: 'pjpg', crop: 'center' }}')">
+    <div class="newsletter-popup-wrapper">
+      {% include 'mailchimp' %}
+    </div>
+  </div>
+{% endfor %}
+
+
+
+{% schema %}
+{
+  "name": "Home Popup",
+  "max_blocks": 1,
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Home-Popup-Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Popup",
+      "category": "Image",
+      "blocks": [
+
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

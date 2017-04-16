@@ -4,8 +4,8 @@
     "theme_name": "Jumpstart",
     "theme_author": "Shopify",
     "theme_version": "2.0.4",
-    "theme_documentation_url": "https://help.shopify.com/manual/using-themes/sections",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_documentation_url": "https:\/\/help.shopify.com\/manual\/using-themes\/sections",
+    "theme_support_url": "https:\/\/support.shopify.com\/"
   },
   {
     "name": "Colors",
@@ -131,67 +131,67 @@
         "type": "text",
         "id": "social_twitter",
         "label": "Twitter",
-        "info": "https://twitter.com/shopify"
+        "info": "https:\/\/twitter.com\/shopify"
       },
       {
         "type": "text",
         "id": "social_facebook",
         "label": "Facebook",
-        "info": "https://www.facebook.com/shopify"
+        "info": "https:\/\/www.facebook.com\/shopify"
       },
       {
         "type": "text",
         "id": "social_google",
         "label": "Google+",
-        "info": "https://plus.google.com/+shopify"
+        "info": "https:\/\/plus.google.com\/+shopify"
       },
       {
         "type": "text",
         "id": "social_youtube",
         "label": "YouTube",
-        "info": "https://www.youtube.com/user/shopify"
+        "info": "https:\/\/www.youtube.com\/user\/shopify"
       },
       {
         "type": "text",
         "id": "social_vimeo",
         "label": "Vimeo",
-        "info": "https://vimeo.com/shopify"
+        "info": "https:\/\/vimeo.com\/shopify"
       },
       {
         "type": "text",
         "id": "social_pinterest",
         "label": "Pinterest",
-        "info": "https://www.pinterest.com/shopify"
+        "info": "https:\/\/www.pinterest.com\/shopify"
       },
       {
         "type": "text",
         "id": "social_snapchat",
         "label": "Snapchat",
-        "info": "https://www.snapchat.com/add/shopify"
+        "info": "https:\/\/www.snapchat.com\/add\/shopify"
       },
       {
         "type": "text",
         "id": "social_tumblr",
         "label": "Tumblr",
-        "info": "http://shopify.tumblr.com"
+        "info": "http:\/\/shopify.tumblr.com"
       },
       {
         "type": "text",
         "id": "social_instagram",
         "label": "Instagram",
-        "info": "https://instagram.com/shopify"
+        "info": "https:\/\/instagram.com\/shopify"
       },
       {
         "type": "text",
         "id": "social_linkedin",
         "label": "LinkedIn",
-        "info": "https://www.linkedin.com/company/shopify"
+        "info": "https:\/\/www.linkedin.com\/company\/shopify"
       },
       {
         "type": "text",
         "id": "social_flickr",
         "label": "Flickr",
-        "info": "https://www.flickr.com/photos/shopify/"
+        "info": "https:\/\/www.flickr.com\/photos\/shopify\/"
       },
       {
         "type": "text",

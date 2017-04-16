@@ -1,9 +1,9 @@
 {% capture header_title %} {{ 'customer.login.title' | t }} {% endcapture %}
 {% include 'page_header' with header_title %}
 
-<div class="white">
+<div class="">
 
-  <div class="wrapper wrapper--margins wrapper--center">
+  <div class="wrapper bottom-margin wrapper--center">
 
     <div class="note form-success" id="ResetSuccess" style="display:none;">
       {{ 'customer.recover_password.success' | t }}
@@ -14,7 +14,8 @@
       {% form 'customer_login' %}
 
         {{ form.errors | default_errors }}
-
+        <div class='oxi-social-login' style="height:88px;"></div>
+        <div class="text-center" style="padding: 10px 0 0 0;">- Or -</div>
         <div class="form__row">
           <div class="form__column full">
             <label for="CustomerEmail">{{ 'customer.login.email' | t }}</label>

@@ -1,0 +1,210 @@
+$small: 480px;
+$medium: 767px;
+$large: 768px;
+$desktop: 1024px;
+
+@mixin prefixer($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      -webkit-#{$property}: $value;
+    } @else if $prefix == moz {
+      -moz-#{$property}: $value;
+    } @else if $prefix == ms {
+      -ms-#{$property}: $value;
+    } @else if $prefix == o {
+      -o-#{$property}: $value;
+    } @else if $prefix == spec {
+      #{$property}: $value;
+    } @else  {
+      @warn "Unrecognized prefix: #{$prefix}";
+    }
+  }
+}
+
+@mixin transform($transform) {
+  @include prefixer(transform, $transform, ms webkit spec);
+}
+
+@mixin user-select($value: none) {
+  @include prefixer(user-select, $value, webkit moz ms spec);
+}
+
+@mixin backface($visibility: hidden) {
+  @include prefixer(backface-visibility, $visibility, webkit spec);
+}
+
+@mixin fallback-text {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+}
+
+@function em($target, $context: $baseFontSize) {
+  @if $target == 0 {
+    @return 0;
+  }
+  @return $target / $context + 0em;
+}
+
+@function color-control($color) {
+  @if (lightness( $color ) > 45) {
+    @return #000;
+  }
+  @else {
+    @return #fff;
+  }
+}
+
+@mixin promote-layer($properties: transform) {
+  -webkit-transform: translateZ(0); /* translateZ hack*/
+  will-change: $properties; /* spec*/
+}
+
+@mixin scale($scale, $origin) {
+  @include prefixer(transform, scale($scale), webkit ms spec);
+  @include prefixer(transform-origin, $origin, webkit ms spec);
+}
+
+@mixin translate3d($x, $y, $z) {
+  @include prefixer(transform, translate3d($x, $y, $z), webkit ms spec);
+}
+
+@mixin rotate($rotation) {
+  @include prefixer(rotate, $rotation, webkit ms spec)
+}
+
+@mixin alphaback($color, $opacity) {
+  background: $color;
+  background: rgba($color, $opacity);
+}
+
+@mixin bgimg() {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+@mixin transition($property, $speed, $easing) {
+  -webkit-transition: $property, $speed, $easing;
+  transition: $property, $speed, $easing;
+}
+
+$button-size: 18px;
+@mixin line {
+  display: inline-block;
+  width: $button-size;
+  height: $button-size/7;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+  background: $colorDrawerText;
+}
+
+@mixin islight($colorlight, $colordark) {
+  .is-light & {
+    color: $colorlight;
+  }
+  .is-dark & {
+    color: $colordark;
+  }
+}
+
+@mixin islightBackground($backgroundlight, $backgrounddark) {
+  .is-light & {
+    background: $backgroundlight;
+  }
+  .is-dark & {
+    background: $backgrounddark;
+  }
+}
+
+@mixin islightColorBackground($colorlight, $backgroundlight, $colordark, $backgrounddark) {
+  .is-light & {
+    color: $colorlight;
+    background: $backgroundlight;
+  }
+  .is-dark & {
+    color: $colordark;
+    background: $backgrounddark;
+  }
+}
+
+@mixin islightColorBorder($colorlight, $borderlight, $colordark, $borderdark) {
+  .is-light & {
+    color: $colorlight;
+    border-color: $borderlight;
+  }
+  .is-dark & {
+    color: $colordark;
+    border-color: $borderdark;
+  }
+}
+
+@mixin invertedLogo($opacity, $visibility, $overflow, $height, $width){
+  opacity: $opacity;
+  visibility: $visibility;
+  overflow: $overflow;
+  height: $height;
+  width: $width;
+}
+
+/* Color animations*/
+%coloranim {
+  -webkit-transition: color 60ms linear, background-color 60ms linear, fill 60ms linear, 60ms opacity linear;
+  transition: color 60ms linear, background-color 60ms linear, fill 60ms linear, 60ms opacity linear;
+}
+
+/* Scale animation*/
+@-webkit-keyframes sk-scaleout {
+  0% { -webkit-transform: scale(0) }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+@keyframes sk-scaleout {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 100% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+$retinaDisplay: "(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)";
+
+$min: min-width;
+$max: max-width;
+@mixin at-query ($constraint_, $viewport1_, $viewport2_:null) {
+ $constraint: $constraint_; $viewport1: $viewport1_; $viewport2: $viewport2_;
+  @if type-of($constraint_) == number {
+    $viewport1 : $constraint_; $viewport2 : $viewport1_; $constraint : null;
+  }
+  @if $constraint == $min {
+    @media screen and ($min: $viewport1) {
+      @content;
+    }
+  } @else if $constraint == $max {
+    @media screen and ($max: $viewport1) {
+      @content;
+    }
+  } @else {
+    @media screen and ($min: $viewport1) and ($max: $viewport2) {
+      @content;
+    }
+  }
+}
+
+@mixin clearfix() {
+  *zoom: 1;
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}

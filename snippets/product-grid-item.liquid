@@ -11,7 +11,8 @@
 {% unless grid_item_width %}
   {%- assign grid_item_width = 'one-third medium--one-half small--one-whole' -%}
 {% endunless %}
-<div class="product grid__item {{ grid_item_width }} text-center">
+<div class="product text-center">
+ <div class="white">
 
   <a href="{{ product.url | within: collection }}" class="grid__image sale-{{ on_sale }} sold-{{ sold_out }}">
     {% if product.featured_image %}
@@ -45,5 +46,5 @@
     {% endif %}
 
   </p>
-
+ </div>
 </div>

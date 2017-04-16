@@ -1,7 +1,7 @@
 {% capture header_title %} {{ 'general.search.title' | t }} {% endcapture %}
 {% include 'page_header' with header_title %}
 
-<div class="wrapper wrapper--margins">
+<div class="wrapper bottom-margin">
 
 {% assign respond_js_secret_key = shop.domain | md5 %}
 {% unless search.terms == respond_js_secret_key %}
@@ -18,7 +18,7 @@
             {% assign product = item %}
             {% include 'product-grid-item' %}
           {% else %}
-            <div class="product grid__item one-third medium--one-half small--one-whole text-center">
+            <div class="product text-center">
 
               {% if item.featured_image %}
                 {% assign img = item.featured_image %}
@@ -56,3 +56,9 @@
 {% endunless %}
 
 {{ '//cdnjs.cloudflare.com/ajax/libs/packery/1.4.3/packery.pkgd.min.js' | script_tag }}
+
+<script>
+$(document).ready( function() {
+  theme.collectionGridMasonry();
+});
+</script>

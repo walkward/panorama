@@ -2,7 +2,7 @@
 {% capture header_title %} {{ 'cart.general.title' | t }} {% endcapture %}
 {% include 'page_header' with header_title %}
 
-<div class="wrapper wrapper--margins wrapper--mini">
+<div class="wrapper bottom-margin">
 
   {% if cart.item_count > 0 %}
 
@@ -83,7 +83,7 @@
         {% endif %}
 
         <div class="grid__item {% if section.settings.cart_notes_enable %}large--one-half{% endif %} text-right">
-          <p class="cart__subtotal-holder">
+          <p>
             <span class="cart__subtotal-title">{{ 'cart.general.subtotal' | t }}</span>
             <span class="h3 cart__subtotal">{{ cart.total_price | money }}</span>
             {% if cart.total_discounts > 0 %}

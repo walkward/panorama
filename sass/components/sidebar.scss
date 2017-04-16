@@ -3,15 +3,36 @@
 }
 .wrapper-with-sidebar {
   width: calc(100% - 300px);
-  margin-right: 0px;
+  margin: 0 0 0 auto;
   padding: 0px 50px;
+  max-width: none;
+  @include at-query($max, $desktop) {
+    width: 100%;
+    padding: 0px 15px;
+    margin: 0px;
+  }
 }
 .collection-sidebar {
   width: 300px;
   display: block;
   height: 100%;
   position: absolute;
-  background: white; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(white, #f9f9f9, #f9f9f9); /* For Safari 5.1 to 6.0 */ /* For Opera 11.1 to 12.0 */ /* For Firefox 3.6 to 15 */
-  background: linear-gradient(white, #f9f9f9, #f9f9f9); /* Standard syntax */
+  background: white;
+  padding: 15px;
+  @include at-query($max, $desktop) {
+    width: 100%;
+    position: relative;
+    display: none;
+  }
+}
+
+.collection-sidebar__title {
+  color: #757575;
+}
+
+.collection-sidebar__item-title {
+  color: #757575 !important;
+  a {
+    color: #757575 !important;
+  }
 }

@@ -6,6 +6,8 @@
 
 <div class="wrapper wrapper-with-sidebar">
 
+  {% include 'collection-sort' %}
+
   {% if collection.image %}
     <div class="collection-image">
       <img src="{{ collection.image.src | img_url: '1024x1024' }}" alt="{{ collection.image.alt }}" />
@@ -55,14 +57,16 @@
                   {% assign index = 1 %}
                   {% for i in (1..6) %}
                     <div class="product grid__item one-third medium--one-half small--one-whole text-center">
-                      <a href="/admin/products" class="grid__image">
-                        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-                        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-                      </a>
-                      <h3>{{ 'homepage.onboarding.product_title' | t }}</h3>
-                      <p class="price">
-                        $19.99
-                      </p>
+                      <div class="white">
+                        <a href="/admin/products" class="grid__image">
+                          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                          {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                        </a>
+                        <h3>{{ 'homepage.onboarding.product_title' | t }}</h3>
+                        <p class="price">
+                          $19.99
+                        </p>
+                      </div>
                     </div>
                     {% assign index = index | plus: 1 %}
                   {% endfor %}

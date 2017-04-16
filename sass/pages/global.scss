@@ -1,4 +1,22 @@
-.white {
+.white,
+#faqs .site-footer  {
   background: #fff !Important;
   background-color: #fff !Important;
+}
+
+.template-collection .site-footer > .white {
+  background: transparent !Important;
+  background-color: transparent !Important;
+}
+
+.window-loaded {
+  opacity: 1 !Important;
+}
+
+.bottom-margin,
+.wrapper.bottom-margin {
+  margin-bottom: 60px !important;
+  @include at-query($max, $desktop) {
+    margin-bottom: 40px;
+  }
 }

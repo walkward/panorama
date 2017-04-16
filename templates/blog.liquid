@@ -1,7 +1,7 @@
 {% capture header_title %}{{ blog.title }}{% if current_tags %} - {{ current_tags.first }}{% endif %}{% endcapture %}
 {% include 'page_header' with header_title %}
 
-<div class="wrapper wrapper--margins">
+<div class="wrapper wrapper--margins blog-wrapper">
 
   {% if settings.blog_rss_enabled %}
     <div class="subscribe-link"><span class="label">{{ 'general.sharing.rss_subscribe' | t }}</span><a href="{{ blog.url }}.atom" target="_blank">{% include 'asset_svg' with 'rss' %}</a></div>
@@ -22,3 +22,5 @@
   {% endpaginate %}
 
 </div>
+
+{% section "newsletter" %}

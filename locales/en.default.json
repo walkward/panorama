@@ -7,7 +7,7 @@
     "404": {
       "title": "404",
       "subtitle": "Page Not Found",
-      "content_html": "The page you requested does not exist. Click <a href=\"/collections/all\">here</a> to continue shopping."
+      "content_html": "The page you requested does not exist. Click <a href=\"\/collections\/all\">here<\/a> to continue shopping."
     },
     "search": {
       "title": "Search",
@@ -91,7 +91,27 @@
   },
   "collections": {
     "general": {
-      "no_matches": "Sorry, there are no products in this collection"
+      "no_matches": "Sorry, there are no products in this collection",
+      "view_all": "View all",
+      "items_with_count": {
+        "one": "{{ count }} product",
+        "other": "{{ count }} products"
+      }
+    },
+    "sorting": {
+      "title": "Sort",
+      "featured": "Featured",
+      "best_selling": "Best Selling",
+      "az": "Alphabetically, A-Z",
+      "za": "Alphabetically, Z-A",
+      "price_ascending": "Price, low to high",
+      "price_descending": "Price, high to low",
+      "date_descending": "Date, new to old",
+      "date_ascending": "Date, old to new"
+    },
+    "filters": {
+      "title_tags": "Filter",
+      "all_tags": "All products"
     }
   },
   "contact": {
@@ -132,7 +152,7 @@
       "city": "City",
       "country": "Country",
       "province": "Province",
-      "zip": "Postal/Zip Code",
+      "zip": "Postal\/Zip Code",
       "phone": "Phone",
       "set_default": "Set as default address",
       "add": "Add Address",
@@ -218,11 +238,10 @@
     },
     "onboarding": {
       "section_title": "Almost there...",
-      "product_title": "Example Product",
+      "product_title": "Example Product Title",
       "modal_title": "Almost there...",
       "no_products_collection": "There are no products yet, but once you begin adding them they will show up here regardless if they are in a collection.",
       "add_product": "Add a Product",
-      "product_title": "Example Product Title",
       "no_content": "This section doesn’t currently include any content. Add content to this section using the sidebar."
     }
   },
@@ -262,7 +281,7 @@
       "add_to_apple_wallet": "Add to Apple Wallet"
     }
   },
-  "date_formats":{
+  "date_formats": {
     "month_day_year": "%B %d, %Y"
   }
 }

@@ -1,16 +1,20 @@
+{% assign current_url = collection.url %}
+
 <aside class="collection-sidebar">
-<ul>
-  <li>Sort</li>
-  <ul>
-    <li></li>
-  </ul>
-  <li>Categories</li>
-  <ul>
-    <li></li>
-  </ul>
-  <li>Filters</li>
-  <ul>
-    <li></li>
-  </ul>
-</ul>
+    <div class="">
+      <h5 class="collection-sidebar__title">{{ collection.title }} Categories</h5>
+      <ul class="">
+        {% for tag in collection.tags %}
+          {% if current_tags contains tag %}
+          <li class="active-filter collection-sidebar__item-title">
+            {{ tag | capitalize | replace: "-", " " | link_to_remove_tag: tag }}
+          </li>
+          {% else %}
+          <li class="collection-sidebar__item-title">
+            {{ tag | capitalize | replace: "-", " " | link_to_tag: tag }}
+          </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+  </div>
 </aside>

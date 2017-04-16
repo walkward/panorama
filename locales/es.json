@@ -218,11 +218,10 @@
     },
     "onboarding": {
       "section_title": "Casi allí...",
-      "product_title": "Ejemplo de producto",
+      "product_title": "Ejemplo título de producto",
       "modal_title": "Casi allí...",
       "no_products_collection": "Todavía no hay productos pero, una vez que comience a añadirlos, se mostrarán aquí sin importar si están en una colección.",
       "add_product": "Añadir un producto",
-      "product_title": "Ejemplo título de producto",
       "no_content": "Esta secção não inclui de momento qualquer conteúdo. Adicione conteúdo a esta secção através da barra lateral."
     }
   },

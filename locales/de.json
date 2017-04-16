@@ -6,8 +6,8 @@
     },
     "404": {
       "title": "404",
-      "subtitle":"Seite nicht gefunden",
-      "content_html":"Die von Ihnen angeforderte Seite existiert nicht. Klicken Sie <a href=\"/collections/all\">hier</a>, um den Einkauf fortzusetzen."
+      "subtitle": "Seite nicht gefunden",
+      "content_html": "Die von Ihnen angeforderte Seite existiert nicht. Klicken Sie <a href=\"\/collections\/all\">hier<\/a>, um den Einkauf fortzusetzen."
     },
     "search": {
       "title": "Suchen Sie auf unserer Seite nach Produkten",
@@ -36,7 +36,7 @@
       "login_form_submit": "Betreten",
       "signup_form_email_label": "E-Mail",
       "signup_form_success": "Wir senden Ihnen eine E-Mail, kurz bevor wir eröffnen!",
-      "admin_link_html": "Sind Sie der Geschäftsinhaber? <a href=\"/admin\" class=\"text-link\">Melden Sie sich hier an</a>",
+      "admin_link_html": "Sind Sie der Geschäftsinhaber? <a href=\"\/admin\" class=\"text-link\">Melden Sie sich hier an<\/a>",
       "password_link": "Mit Passwort betreten",
       "powered_by_shopify_html": "Dieser Shop wird mit Hilfe von {{ shopify }} betrieben werden"
     },
@@ -222,7 +222,6 @@
       "modal_title": "Fast fertig...",
       "no_products_collection": "Es sind noch keine Produkte vorhanden, doch sobald Sie welche hinzufügen, werden sie hier angezeigt, ganz gleich, ob sie zu einer Kollektion gehören oder nicht.",
       "add_product": "Fügen Sie ein Produkt",
-      "product_title": "Beispielhafter Produkttitel",
       "no_content": "Dieser Bereich hat zur Zeit keinen Inhalt. Füge diesem Bereich über die Seitenleiste Inhalte hinzu."
     }
   },
@@ -262,7 +261,7 @@
       "add_to_apple_wallet": "Hinzufügen zu Apple Wallet"
     }
   },
-  "date_formats":{
+  "date_formats": {
     "month_day_year": "%B %d, %Y"
   }
 }

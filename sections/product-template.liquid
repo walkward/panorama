@@ -50,17 +50,7 @@
 
         <h2 class="secondary-title hidden">{{ product.title }}</h2>
 
-        <div class="yotpo bottomLine"
-            data-appkey="I85DOybgapSIniFDnUKwYjFcaMLNj0nNvetq6gVS"
-            data-domain="{{shop.permanent_domain | escape }}"
-            data-product-id="{{ product.id }}"
-            data-product-models="{{ product.id }}"
-            data-name="{{ product.title | escape }}"
-            data-url="{{ shop.url }}{{ product.url }}"
-            data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
-            data-description="{{ product.description | escape }}"
-            data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
-        </div>
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
 
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
@@ -135,15 +125,9 @@
    </div>
  </div>
 </div>
-<div class="product-yotpo-widget">
-  <div class="wrapper">
-    <div class="yotpo yotpo-main-widget"
-      data-product-id="{{ product.id }}"
-      data-name="{{ product.title | escape }}"
-      data-url="{{ shop.url }}{{ product.url }}"
-      data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}"
-      data-description="{{ product.description | escape }}">
-    </div>
+<div class="wrapper wrapper--margins">
+  <div class="product-review-widget">
+    <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
   </div>
 </div>
 
