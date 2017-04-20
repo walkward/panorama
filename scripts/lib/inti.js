@@ -1,18 +1,7 @@
-//Initialize Functions
-$(document).ready( function(){
-
-});
-
-function resizedw(){
-  theme.collectionGridMasonry();
-}
-var doit;
-window.onresize = function(){
-  clearTimeout(doit);
-  doit = setTimeout(resizedw, 100);
-};
-
-$(window).load( function(){
-  //Prevent Header Resizing Until Everything is loaded
-  $("body").addClass("window-loaded");
+// materialize init
+$(document).ready(function(){
+  $('.menu-btn').click(function(){
+    $('#slide-out').toggleClass("closed");
+    $('.panorama-wrapper').toggleClass("sidenav-closed");
+  });
 });

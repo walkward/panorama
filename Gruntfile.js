@@ -1,6 +1,9 @@
 module.exports = function(grunt) {
   // The order of JS files that get loaded
   var jsBuildFiles = ['scripts/plugins/vendor.js',
+                      'scripts/plugins/lightgallery.js',
+                      'scripts/plugins/pannellum.js',
+                      'scripts/plugins/cart.js',
                       'scripts/theme.js',
                       'scripts/lib/*.js'];
 
@@ -16,7 +19,7 @@ module.exports = function(grunt) {
           require: 'sass-globbing'
         },
         files: {
-          'assets/sawderstudio.css.liquid' : 'sass/styles.sass'
+          'assets/panorama.css.liquid' : 'sass/styles.sass'
         }
       },
       // Compress CSS for production
@@ -27,7 +30,7 @@ module.exports = function(grunt) {
           require: 'sass-globbing'
         },
         files: {
-          'assets/sawderstudio.css.liquid' : 'sass/styles.sass'
+          'assets/panorama.css.liquid' : 'sass/styles.sass'
         }
       }
     },

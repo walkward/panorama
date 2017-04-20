@@ -1,6 +1,6 @@
 development:
   password: eb5c93d8dc8c6afebd0a8f217f52033a
-  theme_id: "182539151"
+  theme_id: "183110031"
   store: sawderstudio.myshopify.com
   ignore_files:
     - Gemfile
