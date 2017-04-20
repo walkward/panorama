@@ -1,7 +1,7 @@
 {% capture header_title %} {{ 'customer.account.title' | t }} {% endcapture %}
 {% include 'page_header' with header_title %}
 
-<div class="wrapper wrapper--margins wrapper--mini">
+<div class="wrapper bottom-margin wrapper--mini">
 
   {% paginate customer.addresses by 6 %}
 
@@ -130,7 +130,7 @@
 
     {% include 'page_pagination' %}
 
-    <hr class="thin-line" />
+
 
     <a href="#" class="btn btn--regular btn--outline btn--dark left" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;">{{ 'customer.addresses.add_new' | t }}</a>
 

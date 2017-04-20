@@ -24,18 +24,5 @@ $(document).ready( function(){
 
     localStorage.setItem('lastDatePopupShowed', now);
   }
-  setTimeout(function(){
-    var el = $('#newsletter-popup');
-    if (el.length) {
-        $.magnificPopup.open({
-            items: {
-                src: el
-            },
-            type: 'inline',
-            mainClass: 'mfp-zoom-in',
-            removalDelay: 500
-        });
-    }
-   }, 3000);
 
 });

@@ -1,8 +1,8 @@
 module.exports = function(grunt) {
   // The order of JS files that get loaded
-  var jsBuildFiles = ['scripts/plugins/*.js',
-                      'scripts/main.js',
-                    'scripts/lib/*.js'];
+  var jsBuildFiles = ['scripts/plugins/vendor.js',
+                      'scripts/theme.js',
+                      'scripts/lib/*.js'];
 
   // Project configuration.
   grunt.initConfig({
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
       options: {
         banner: '/*! <%= pkg.name %>*/\n'
       },
-      build: {
+      watch: {
         src: jsBuildFiles,
         dest: 'assets/<%= pkg.name %>.js'
       }
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['scripts/**/*.js'],
-        tasks: ['concat'],
+        tasks: ['uglify'],
         options: {
           spawn: false
         },

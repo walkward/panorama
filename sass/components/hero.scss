@@ -1,0 +1,9 @@
+@include at-query($max, $medium) {
+  .home-hero {
+    img {
+      height: 400px;
+      -o-object-fit: cover;
+         object-fit: cover;
+    }
+  }
+}

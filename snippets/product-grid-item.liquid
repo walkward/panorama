@@ -16,7 +16,7 @@
 
   <a href="{{ product.url | within: collection }}" class="grid__image sale-{{ on_sale }} sold-{{ sold_out }}">
     {% if product.featured_image %}
-      <img class="retina-img" src="{{ product.featured_image.src | img_url: 'large' }}" data-retina-src="{{ product.featured_image.src | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}">
+      <img class="retina-img" src="{{ product.featured_image.src | img_url: '300x300', format: 'pjpg', crop: 'center' }}" data-retina-src="{{ product.featured_image.src | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}">
     {% else %}
     {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
       {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
@@ -27,24 +27,25 @@
       <span class="badge badge--on-sale">{{ 'products.product.on_sale' | t }}</span>
     {% endif %}
   </a>
+  <span class="product-text">
+    <p class="h3"><a href="{{ product.url | within: collection }}">{{ product.title | truncate: 30 }}</a></p>
 
-  <p class="h3"><a href="{{ product.url | within: collection }}">{{ product.title | truncatewords: 5 }}</a></p>
+    <p class="price">
 
-  <p class="price">
+      {% if product.price_varies %} {{ 'products.product.on_sale_from' | t }} {% endif %}
+      {% if on_sale %}
+        <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
+      {% else %}
+        <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+      {% endif %}
+      {{ product.price | money }}
 
-    {% if product.price_varies %} {{ 'products.product.on_sale_from' | t }} {% endif %}
-    {% if on_sale %}
-      <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
-    {% else %}
-      <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-    {% endif %}
-    {{ product.price | money }}
+      {% if on_sale %}
+        <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+        <span class="compare-price">{{ product.compare_at_price | money }}</span>
+      {% endif %}
 
-    {% if on_sale %}
-      <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-      <span class="compare-price">{{ product.compare_at_price | money }}</span>
-    {% endif %}
-
-  </p>
+    </p>
+  </span>
  </div>
 </div>

@@ -4,7 +4,7 @@
       {% for block in section.blocks %}
         <div class="text-center">
             <a href="{{ block.settings.link }}" class="slide-link slide-link--{{ block.id }}">
-              <img src="{{ block.settings.image | img_url: '1200x400', format: 'pjpg', crop: 'center' }}" alt="{{ block.settings.image.alt | escape }}" id="slide-{{ block.id }}" data-retina-src="{{ block.settings.image | img_url: '1200x400', format: 'pjpg', crop: 'center' | scale: 2 }}" class="retina-img">
+              <img src="{{ block.settings.image | img_url: '1400x500', format: 'pjpg', crop: 'center' }}" alt="{{ block.settings.image.alt | escape }}" id="slide-{{ block.id }}" data-retina-src="{{ block.settings.image | img_url: '1400x500', format: 'pjpg', crop: 'center' | scale: 2 }}" class="retina-img">
             </a>
         </div>
       {% endfor %}

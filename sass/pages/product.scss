@@ -1,0 +1,5 @@
+.product-wrapper {
+  @include at-query($max, $medium) {
+    padding-top: 0px !important;
+  }
+}

@@ -133,7 +133,7 @@ $successGreen: #56ad6a;
 $successGreenBg: #ecfef0;
 
 // Sizing variables
-$siteWidth: 1200px;
+$siteWidth: 1400px;
 $gutter: 30px;
 $gridGutter: 8%;
 $gridGutterSmall: 4.5%;
@@ -1183,7 +1183,7 @@ body {
 
   @include at-query($max, $small) {
     &, &.wrapper--mini {
-      margin: 0 30px;
+      margin: 0 15px;
     }
 
     &.wrapper--margins {
@@ -1196,13 +1196,21 @@ body {
  *  2.2. Header
 */
 
+#shopify-section-header {
+  @include at-query($max, $small) {
+    max-height: 0px;
+  }
+}
+
 .site-header {
 
   z-index: 9999;
   width: 100%;
   height: 90px;
-  background: white;
   border-bottom: 1px solid #f1f1f1;
+  &:not(.mobile) {
+    background: white !Important;
+  }
 
   .wrapper {
     height: 100%;
@@ -1220,8 +1228,9 @@ body {
     left: 0;
     height: 70px;
     @include translate3d(0, -70px, 0);
-    background: #fff;
+    background: #f9f9f9;
     border-bottom: 1px solid $colorBorder;
+    transition: transform 250ms linear;
 
     &.active {
       @include translate3d(0, 0, 0);
@@ -1237,8 +1246,12 @@ body {
   &.mobile {
     @include translate3d(0, 0, 0);
     height: 50px;
+    .nav-bar {
+      left: 0;
+    }
     .site-header__logo {
       height: 50px !important;
+      z-index: 999999;
       .site-header__logo-link svg {
         max-height: 40px !important;
         visibility: visible !important;
@@ -1400,7 +1413,7 @@ body {
 
 .nav-bar {
   position: absolute;
-  right: 0;
+  left: 175px;
   top: 0;
   height: 100%;
   display: table;
@@ -1452,21 +1465,6 @@ body {
 
       .created-by-js & {
         @include islight($colorTitle, $colorTitle);
-      }
-
-      &:after, &.site-nav--active:after {
-        content: "";
-        display: block;
-        position: absolute;
-        background: $colorPrimary;
-        width: calc(100% - 10px);
-        bottom: 0;
-        left: 5px;
-        height: 0;
-        transition: 200ms linear height;
-      }
-      &:hover:after, &.site-nav--active:after {
-        height: 2px;
       }
       &.site-nav--active {
         @include islight(#fff !important, #000 !important);
@@ -1598,26 +1596,24 @@ body {
   // Site drawer (mobile) variation
   .site-header--drawer & {
     position: fixed;
-    width: 370px;
+    width: 100%;
     height: 100%;
     top: 0;
     right: 0;
     background: $colorDrawers;
-    padding: 75px;
+    padding: 60px 0 0 0;
     display: block;
 
-    @include translate3d(370px, 0px, 0px);
+    @include translate3d(100%, 0px, 0px);
 
-    &.opened {
-      @include translate3d(0px, 0px, 0px);
-    }
     &.animate {
       transition: transform 200ms linear;
     }
 
-    @include at-query($max, $medium) {
-      padding: 20px;
+    &.opened {
+      @include translate3d(0px, 0px, 0px);
     }
+
     @include at-query($max, 370px) {
       width: 100%;
     }
@@ -1629,7 +1625,7 @@ body {
     li {
 
       text-transform: none;
-      margin: 0 0 18px;
+      margin: 0;
       float: none;
 
       a {
@@ -1740,23 +1736,17 @@ body {
 
 }
 
-.site-header--classic .site-nav,
-.site-header--classic .site-header__logo {
 
-  .js & {
-    opacity: 0;
-    @include prefixer(transition, opacity .15s ease-in, webkit moz);
-  }
 
-  .no-js & {
-    opacity: 1;
-  }
+.js {
+  opacity: 1;
+  @include prefixer(transition, opacity .15s ease-in, webkit moz);
 }
 
-.sticky .site-nav,
-.sticky .site-header__logo{
-  opacity: 1 !important;
+.no-js {
+  opacity: 1;
 }
+
 
 // Responsive menu querys (and "hamburger" button w/ animation)
 
@@ -1766,15 +1756,13 @@ body {
 
 .lines-button {
   display: inline-block;
-  padding: 5px;
+  padding: 0px 0 4px 0;
   transition: .3s;
   cursor: pointer;
-
   position: fixed;
   top: 0;
   right: 0;
   z-index: 999999;
-  background: $colorDrawers;
   width: 50px;
   height: 49px;
 
@@ -1831,23 +1819,21 @@ body {
   opacity: 0;
 
   .site-header--classic & {
-
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    width: 160px;
+    padding: 30px 0px 0px 0px !important;
+    position: fixed;
+    max-width: none;
+    top: 60px;
+    left: 0;
+    width: 100%;
     height: auto;
-    margin-left: -50px;
-    padding-top: 5px;
+    margin-left: 0px;
+    padding-top: 0px;
     text-align: left;
 
     > div {
       background: #fff;
-      padding: 12px 15px 10px;
-      border-radius: 1px;
-      border: solid #eee 1px;
       position: relative;
-      top: 5px;
+      width: 100%;
     }
 
     li {
@@ -1863,12 +1849,11 @@ body {
 
       display: block;
       float: none;
-      margin: 10px 0;
 
       a.site-nav--active {
         @include islight(#000 !important, #000 !important);
 
-        font-weight: 700;
+        color: $colorLink;
       }
 
     }
@@ -1879,11 +1864,9 @@ body {
 
     margin: 0 !important;
     width: auto !important;
-    padding-top: 10px;
 
     li {
       font-size: 0.75em;
-      margin: 10px 15px;
     }
 
     .arrow {
@@ -1913,7 +1896,6 @@ body.opened-drawer {
 
 .site-footer {
 
-  background-color: $colorFooterBg;
   color: $colorFooterText;
   //padding: 1.5em 0 0 0;
 
@@ -1941,37 +1923,35 @@ body.opened-drawer {
 
     a {
       font-size: em(15px);
-      line-height: 1;
+      line-height: 2;
       font-weight: 600;
       margin: 0 15px;
     }
 
-    & + hr {
-      display: block;
-    }
-
-  }
-
-  hr {
-    max-width: 500px;
-    height: 1px;
-    background: lighten($colorFooterBg, 20%);
-    margin: 19px auto 18px;
-    border: none;
-    display: none;
   }
 
   .copy {
     font-size: em(12.5px);
+    margin-bottom: 5px;
     > p {
       display: inline;
+      color: #cccccc;
+      a {
+        color: #cccccc;
+      }
       &:first-child:after {
         content: ".";
       }
     }
   }
   .footer__logo {
-    margin: 0.5em 0;
+    margin: em(40px) 0 0 0;
+    @include at-query($max, $small) {
+      margin: em(26px) 0 0 0;
+    }
+    svg {
+      max-width: 250px;
+    }
   }
   @include at-query($max, $small) {
   padding-bottom: 0px !important;
@@ -2208,7 +2188,6 @@ svg:not(:root) {
 }
 
 svg, svg {
-  @extend %coloranim;
 
   .is-light & {
     fill: #fff;
@@ -2754,10 +2733,11 @@ label {
     border: 2px solid;
 
     &.btn--color {
-      color: $colorBtnPrimary;
-      border-color: $colorBtnPrimary;
+      color: $colorBtnSecondary;
+      border-color: $colorBtnSecondary;
       &:hover {
-        background: $colorBtnPrimary;
+        color: $colorBtnPrimary;
+        border-color: $colorBtnPrimary;
       }
     }
 
@@ -2975,7 +2955,7 @@ $color-blankstate-background: rgba(color-control($colorBodyAlt), 0.1);
 
   @include at-query($max, 1025px) {
 
-    margin-bottom: 70px;
+    margin-bottom: 20px;
 
     .product & {
 
@@ -3572,6 +3552,8 @@ hr.thin-line {
 
   @include at-query($max, $medium) {
 
+    padding: 40px 0px;
+
     h3 {
 
       font-size: em(15px);
@@ -3651,6 +3633,9 @@ hr.thin-line {
     .dummy-holder {
       padding-top: 60%;
     }
+  }
+  img {
+    filter: grayscale(100%) contrast(0%) brightness(0.15);
   }
 
 }
@@ -3770,7 +3755,10 @@ hr.thin-line {
 
 #infinite-link {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 70px;
+  @include at-query($max, $medium) {
+    margin-top: 0px;
+  }
 }
 
 /* -- Article (blog list view) -- */
@@ -4132,7 +4120,7 @@ hr.thin-line {
 
   @include clearfix();
   float: left;
-  margin-bottom: 60px;
+  margin-bottom: 0px;
   width: 100%;
 
   @include at-query($max, $medium) {
@@ -4194,24 +4182,41 @@ hr.thin-line {
 }
 
 .collection-list {
+
+  &.packery-initialized {
+    .product {
+      opacity: 1;
+    }
+  }
+
   @include at-query($max, $medium) {
     margin-left: 0px !important;
   }
-  .product {
+  .product,
+  .product-grid-sizer {
+    opacity: 0;
     padding: 0 0 2% 2%;
     box-sizing: border-box;
     float: left;
     min-height: 1px;
     vertical-align: top;
 
-    @include at-query($max, $medium) {
-      padding: 0;
-    }
-
-    > a {
-      background: $colorBodyAlt;
+    > .white {
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
       display: block;
       position: relative;
+      > a {
+        display: block;
+      }
+    }
+
+    .product-text {
+      display: inline-block;
+      width: 100%;
+      padding:15px;
+      @include at-query($max, $medium) {
+        padding: 5px 8px;
+      }
     }
 
     .badge {
@@ -4227,9 +4232,6 @@ hr.thin-line {
     }
     @include at-query($max, $medium) {
       width: 50%;
-    }
-    @include at-query($max, $small) {
-      width: 100%;
     }
     @include at-query($min, $medium) {
       width: 33.333%;
@@ -4247,7 +4249,6 @@ hr.thin-line {
 
     font-size: em(16px);
     font-family: $bodyFontStack;
-    margin: 15px 0 -2px;
 
     a {
       color: $colorTitle;
@@ -4271,8 +4272,7 @@ hr.thin-line {
     font-family: $headerFontStack;
     color: lighten($colorSubtitle, 10%);
     line-height: 1;
-    margin-top: 10px;
-    padding-bottom: 15px;
+    margin-top: 8px;
     margin-bottom: 0px;
 
     .compare-price {
@@ -4287,32 +4287,6 @@ hr.thin-line {
     margin-top: 30px;
   }
 
-  @include at-query($max, $medium) {
-
-    margin-bottom: -35px;
-
-    .product {
-      padding-bottom: 35px;
-    }
-
-    h3 {
-      margin-top: 25px;
-      font-size: em(14px);
-    }
-
-    .price {
-      font-size: em(24px);
-    }
-
-  }
-
-  @include at-query($max, $medium) {
-    margin-bottom: -15px;
-    .product {
-      padding-bottom: 15px;
-    }
-  }
-
 }
 
 .collection-image {
@@ -4322,6 +4296,7 @@ hr.thin-line {
     width: 100%;
   }
 }
+
 
 /* -- Product differences -- */
 

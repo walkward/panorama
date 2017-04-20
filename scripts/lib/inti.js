@@ -5,7 +5,6 @@ $(document).ready( function(){
 
 function resizedw(){
   theme.collectionGridMasonry();
-  console.log("go")
 }
 var doit;
 window.onresize = function(){
@@ -15,5 +14,5 @@ window.onresize = function(){
 
 $(window).load( function(){
   //Prevent Header Resizing Until Everything is loaded
-  $("#header-wrapper").addClass("window-loaded");
+  $("body").addClass("window-loaded");
 });

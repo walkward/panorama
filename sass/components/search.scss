@@ -1,6 +1,9 @@
-.search-bar-header {
+.search-bar-header,
+.search-bar-wrapper {
   margin: 0px 15px !important;
   input[type="search"] {
+    color: #222;
+    border: none;
     margin-bottom: 0px;
     height: 40px;
     padding-left: 40px;
@@ -23,14 +26,15 @@
       color: #cacaca;
     }
   }
-  .btn {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    height: 40px;
-    line-height: 40px;
-    padding: 8px;
-  }
+}
+
+.search-btn {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 40px;
+  line-height: 40px;
+  padding: 8px;
 }
 
 .site-header--drawer {

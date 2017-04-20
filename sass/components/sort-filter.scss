@@ -17,11 +17,9 @@ $toolbar-height-small: 40px;
   -o-align-items: center;
   -webkit-box-align: center;
           align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   position: relative;
-  @include at-query($max, $medium) {
-    margin-top: 15px;
-  }
+  padding: 0 0 0 2%;
 }
 
 .filters-toolbar__item {

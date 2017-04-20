@@ -21,7 +21,7 @@
 
       <div class="wrapper text-center white">
 
-        <div class="h1 footer__logo" itemscope itemtype="http://schema.org/Organization">
+        <div class="footer__logo" itemscope itemtype="http://schema.org/Organization">
           {% if section.settings.footer_logo != blank %}
            {% if section.settings.footer_logo_max_width != empty %}
             {% capture image_size %}{{ section.settings.footer_logo_max_width | escape }}x{% endcapture %}
@@ -42,14 +42,8 @@
               <a class="footer-link" href="{{ link.url }}">{{ link.title }}</a>
             {% endfor %}
           </div>
-          <hr>
-        {% endif %}
 
-        <div class="copy">
-          <p class="text">{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }} <a href="/">{{ shop.name }}</a></p>
-          <p class="text"><a href="/privacy">Privacy | </a></p>
-          <p class="text"><a href="/terms-of-use">Terms & Conditions</a></p>
-        </div>
+        {% endif %}
 
         {% if social_icons %}
               <aside class="social-footer">
@@ -73,6 +67,12 @@
             {% endfor %}
           </div>
         {% endif %}
+
+        <div class="copy">
+          <p class="text">{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }} <a href="/">{{ shop.name }}</a></p>
+          <p class="text"><a href="/privacy">Privacy | </a></p>
+          <p class="text"><a href="/terms-of-use">Terms & Conditions</a></p>
+        </div>
 
       </div>
 

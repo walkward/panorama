@@ -23,7 +23,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="{{ settings.color_primary }}">
 
-  {% include 'head_fonts' %}
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'sawderstudio.css' | asset_url | stylesheet_tag }}
 
@@ -44,22 +43,15 @@
   </script>
 
   {{ '//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js' | script_tag }}
-  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
-  <!--[if lte IE 9]><script src="{{ 'vendor.js' | asset_url }}"></script><![endif]-->
 
-  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'theme.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
-  <!--[if lte IE 9]><script src="{{ 'theme.js' | asset_url }}"></script><![endif]-->
-  <script src="{{ 'sawderstudio.js' | asset_url }}" defer="defer"></script>
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'sawderstudio.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'sawderstudio.js' | asset_url }}"></script><![endif]-->
 
   {{ content_for_header }}
 
   {% if template.directory == 'customers' %}
     {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
   {% endif %}
-  <!-- Yotpo Script -->
-  <script type="text/javascript">
-    (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/I85DOybgapSIniFDnUKwYjFcaMLNj0nNvetq6gVS/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
-  </script>
 
   <meta name="google-site-verification" content="OXSoSofei_9bYhCcK_V8-uTspXbBqWe2qDTeVjHXd0Y" />
   <meta name="google-site-verification" content="8czuDhaNLwF5L1xgaiI6BaWCLgPW20Syv4P9Lznla6c" />
@@ -71,6 +63,8 @@
   <div id="PageContainer"{% if color %} class="{{ color }}"{% endif %}>
 
     {% section 'header' %}
+
+    <div id="menu-overlay"></div>
 
     <main class="main-content" role="main">
 

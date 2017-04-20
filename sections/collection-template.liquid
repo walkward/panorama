@@ -8,16 +8,10 @@
 
   {% include 'collection-sort' %}
 
-  {% if collection.image %}
-    <div class="collection-image">
-      <img src="{{ collection.image.src | img_url: '1024x1024' }}" alt="{{ collection.image.alt }}" />
-    </div>
-  {% endif %}
-
   {%- assign limit = section.settings.grid | times: section.settings.rows -%}
   {% paginate collection.products by limit %}
 
-    <div class="collection-list grid-uniform {% unless shop.products_count == 0 %} small-gutter {% endunless %}">
+    <div class="collection-list">
 
 
       {% case section.settings.grid %}
@@ -30,6 +24,11 @@
       {% when '5' %}
         {%- assign grid_item_width = 'small--one-half medium--one-third large--one-fifth' -%}
       {% endcase %}
+
+      {% comment %}
+      <!-- Grid Sizer for Packery -->
+      {% endcomment %}
+      <div class="product-grid-sizer"></div>
 
       {% for product in collection.products %}
 

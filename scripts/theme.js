@@ -181,6 +181,7 @@ timber.cacheSelectors = function () {
 
     // Navigation
     $navigation              : $('#AccessibleNav'),
+    $menuOverlay             : $('#menu-overlay'),
     $navBar                  : $('.nav-bar'),
     $mobileSubNavToggle      : $('.mobile-nav__toggle'),
     $header                  : $('.site-header'),
@@ -224,6 +225,7 @@ timber.accessibleNav = function () {
       $topLevel = $nav.children('li').find('a'),
       $parents = $nav.find('.site-nav--has-dropdown'),
       $subMenuLinks = $nav.find('.site-nav__dropdown').find('a'),
+      $childMenuLinks = $nav.find('.child-link.with-children'),
       activeClass = 'nav-hover',
       focusClass = 'nav-focus';
 
@@ -236,10 +238,26 @@ timber.accessibleNav = function () {
     }
 
     showDropdown($el);
+
+    timber.cache.$menuOverlay.addClass("active");
+
+    $childMenuLinks.on('mouseenter touchstart', function(evt) {
+      var $el = $(this);
+      if (!$el.hasClass("other-active")) {$nav.find(".site-child--active").removeClass("other-active")};
+      $childMenuLinks.each(function(){
+        $(this).removeClass("active");
+        $(this).next(".grand-child-wrapper").removeClass("active");
+      });
+      $el.addClass("active");
+      $el.next(".grand-child-wrapper").addClass("active");
+      $nav.find(".site-child--active").addClass("other-active");
+    });
+
   });
 
   // Mouseout
   $parents.on('mouseleave', function() {
+    timber.cache.$menuOverlay.removeClass("active");
     hideDropdown($(this));
   });
 
@@ -759,10 +777,6 @@ theme.Header = (function() {
 		menuStyleCheck();
 		stickyHeader();
 
-		if ($('.link-list').length > 0) {
-		  $('.link-list').clone().appendTo($('.nav-bar'));
-		}
-
 		menuDrawerButtons();
 		dropDownMenus();
 
@@ -772,7 +786,7 @@ theme.Header = (function() {
 	/* Function that decides whether to show a hamburger icon or all the links */
 	function fitNav() {
 		if (cache.$wrapper.width() < (cache.navWidth + cache.logoWidth) && cache.$siteHeader.hasClass('site-header--classic')) {
-			cache.$mobileMenu.removeClass('animate');
+      cache.$mobileMenu.removeClass('animate');
 			cache.$siteHeader.removeClass('site-header--classic');
 			cache.$siteHeader.addClass('site-header--drawer mobile sticky');
 			cache.$siteHeaderSticky.css('display', 'none');
@@ -780,7 +794,7 @@ theme.Header = (function() {
 			.find('.btn__buy a')
 			.removeClass('btn--small btn--dark')
 			.addClass('btn--regular btn--light');
-			setTimeout(function() {
+      setTimeout(function() {
 				cache.$mobileMenu.addClass('animate');
 			}, 200);
         // Make drawer a11y unaccessible
@@ -831,10 +845,6 @@ function stickyHeader () {
       cache.$siteHeaderSticky = $('.site-header:last-of-type');
       cache.$siteHeaderSticky.addClass('sticky created-by-js').attr('aria-hidden', true).find('a').attr('tabIndex', -1);
 
-      setTimeout(function(){
-        cache.$siteHeaderSticky.addClass('animate');
-      }, 500)
-
       $(window).on('scroll', function(){
         if ( $(window).scrollTop() > 300 && !cache.$siteHeaderSticky.hasClass('active') ) {
           cache.$siteHeaderSticky.addClass('active');
@@ -857,10 +867,6 @@ function menuDrawerButtons (){
 		}
 		e.preventDefault();
 	});
-
-	setTimeout(function() {
-		cache.$mobileMenu.addClass('animate');
-	}, 500);
 }
 
 
@@ -1446,11 +1452,15 @@ theme.collectionGridMasonry = (function() {
       if ( (typeof $.fn.packery !== 'undefined') && ($('.collection-list').length > 0) ) {
       $('.collection-list').imagesLoaded(function() {
         $('.collection-list').packery({
-          columnWidth: $('.collection-list').find('.product')[0],
+          columnWidth: '.product-grid-sizer',
           itemSelector: '.product',
+          gutter: 0,
           transitionDuration: '0.4s',
           percentPosition: true
         });
+      });
+      $('.collection-list').one( 'layoutComplete', function() {
+        $(this).addClass("packery-initialized");
       });
     }
   });
@@ -1635,6 +1645,7 @@ $(document).ready(function() {
         $siteHeader = $('.site-header'),
         $menu = $('#menu'),
         $nav = $('#AccessibleNav'),
+        $menuOverlay = $('#menu-overlay'),
         $siteLogo = $('.site-header__logo'),
         $mobileMenu = $('.nav-bar'),
         $mobileMenuButton = $('#menu-opener'),
