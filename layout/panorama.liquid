@@ -28,7 +28,7 @@
 {{content_for_layout}}
 
 <wrapper class="panorama-wrapper">
-  <a href="#" data-activates="slide-out" class="button-collapse menu-btn show-on-large"><i class="material-icons"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#000000" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg></i></a>
+  <a href="#" data-activates="slide-out" class="button-collapse menu-btn show-on-large"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#000000" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg></a>
   <div id="panorama"></div>
 </wrapper>
 
@@ -36,47 +36,98 @@
 {{ 'panorama.js' | asset_url | script_tag }}
 
 <script>
-viewer = pannellum.viewer('panorama', ﻿{
-    "type": "equirectangular",
-    "panorama": "{{ collection.image.src | img_url: 'master', scale: 2, format: 'pjpg' | split:'?' | first }}",
-    "autoLoad": true,
-    "hotSpotDebug": true,
-    "hotSpots": [
-            {% for product in collection.products limit: product_limit %}
-            {
-            {% for field in product.metafields.c_f %}
-            {{ field | first }}:{{ field | last }},
-            {% endfor %}
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs":  {
-              "title": "{{ product.title }}",
-              "variantID": "{% for variant in product.variants limit: 1 %}{{ variant.id }}{% endfor %}"
-              },
-            },
-            {% endfor %}
-    ]
+viewer = pannellum.viewer('panorama', {
+    "default": {
+        "firstScene": "{%- for link in linklists['panorama'].links limit: 1 -%}{{- link.title | handleize -}}{% endfor %}",
+        "autoLoad": true,
+        "hotSpotDebug": true,
+        "sceneFadeDuration": 1000
+    },
+
+    "scenes": {
+        {%- for link in linklists['panorama'].links -%}
+        {%- assign link_handle = link.title | handleize -%}
+        {%- assign collection = collections.[link_handle] -%}
+        "{{- link_handle -}}": {
+            "hfov": 120,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "{%- if collection.image -%}{{- collection.image.src | img_url: 'master', scale: 2, format: 'pjpg' | split:'?' | first -}}{%- endif -%}",
+            "hotSpots": [
+                    {%- for product in collections.[link_handle].products -%}
+                    {
+                    {%- for field in product.metafields.c_f -%}
+                    "{{- field | first -}}":{{- field | last -}},
+                    {%- endfor -%}
+                    "cssClass": "custom-hotspot",
+                    "createTooltipFunc": hotspot,
+                    "createTooltipArgs":  {
+                      "title": "{{- product.title -}}",
+                      "variantID": "{%- for variant in product.variants limit: 1 -%}{{- variant.id -}}{%- endfor -%}",
+                      "image_src": "{{ product.featured_image.src | img_url: '150x150', crop: 'center' }}"
+                      },
+                      "clickHandlerFunc": hotspotClick,
+                      "clickHandlerArgs": {
+                        "variantID": "{%- for variant in product.variants limit: 1 -%}{{- variant.id -}}{%- endfor -%}"
+                      },
+                    }{%- unless forloop.last -%},{%- endunless -%}
+                    {%- endfor -%}
+            ]}{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+    }
 });
+
+
 // Hot spot creation function
 function hotspot(hotSpotDiv, args) {
-    console.log(args);
     hotSpotDiv.classList.add('custom-tooltip');
-    hotSpotDiv.setAttribute('data-cart-add', args.variantID);
     var span = document.createElement('span');
-    span.innerHTML = args.title;
+    span.innerHTML = '<span>' + args.title + '</span>';
     hotSpotDiv.appendChild(span);
-    span.style.width = span.scrollWidth - 20 + 'px';
+    var img = document.createElement('img');
+    img.src = args.image_src;
+    span.insertBefore(img, span.firstChild );
+    var viewBtn = document.createElement('a');
+    viewBtn.setAttribute('data-view-product', args.variantID);
+    viewBtn.innerHTML = "View";
+    span.insertBefore(viewBtn, span.firstChild );
+    var buyBtn = document.createElement('a');
+    buyBtn.setAttribute('data-addtocart', args.variantID);
+    buyBtn.innerHTML = "Buy Now";
+    span.insertBefore(buyBtn, span.firstChild );
     span.style.marginLeft = -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + 'px';
-    span.style.marginTop = -span.scrollHeight - 12 + 'px';
+    span.style.marginTop = -span.scrollHeight + 'px';
 }
+function hotspotClick(hotSpotDiv, args) {
+  var addToCartId = hotSpotDiv.srcElement.getAttribute("data-addtocart");
+  console.log("hotSpotDiv.srcElement")
+  var productId = hotSpotDiv.srcElement.getAttribute("data-view-product");
+  if (productId) {
+    document.getElementById("product-"+productId).style.backgroundColor = "#f4f4f4";
+    openTab("tab-catalog");
+    setTimeout(function(){
+      document.getElementById("product-"+productId).style.backgroundColor = "#fff"; },
+    1000);
+  } else if (addToCartId) {
+    CartJS.addItem(addToCartId, 1);
+    openTab("tab-cart");
+  }
+}
+
+$("[data-view-product]").click(function(){
+  console.log("i heard you");
+  openTab("tab-catalog");
+});
 </script>
 
 <script>
 // initialize cart.js
-jQuery(function() {
+$(function() {
     CartJS.init({{ cart | json }}, {
-        "dataAPI": true,
-        "requestBodyClass": "loading"
+        rivetsModels: {
+            "customer": {{ customer | json }}
+        }
     });
 });
 </script>

@@ -1,0 +1,13 @@
+{% for product in collection.products limit: product_limit %}
+<div id="product-{%- for variant in product.variants limit: 1 -%}{{- variant.id -}}{%- endfor -%}" class="catalog-inner pano-sidebar-item">
+  <div class="panorama-collection-item">
+    <img src="{{ product.featured_image.src | img_url: 'small' }}" alt="{{ product.featured_image.alt | escape }}">
+  </div>
+  <div class="panorama-collection-item">
+    <div class="sidebar-product-title">{{ product.title }}</div>
+    {% for variant in product.variants limit: 1 %}
+      <button id="addToCart" data-cart-add="{{ variant.id }}" class="btn btn--outline btn--small btn--color">Add to Cart</button>
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}

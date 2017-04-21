@@ -1,0 +1,41 @@
+<ul class="panorama-room-list">
+  {% for link in linklists['panorama'].links %}
+    {%- assign child_list_handle = link.title | handleize -%}
+    {% if linklists[child_list_handle].links != blank %}
+      <li class="{% if link.active %} pano-nav--active{% endif %}" aria-haspopup="true">
+        <a href="{{ link.url }}">
+          {{ link.title }}
+        </a>
+        <ul>
+          <div>
+            {% for childlink in linklists[child_list_handle].links %}
+            {% assign grand_child_list_handle = childlink.title | handle %}
+            {% if linklists[grand_child_list_handle] and linklists[grand_child_list_handle].links.size > 0 %}
+            <li>
+              <a href="{{ childlink.url }}" class="{% if childlink.active %} pano-nav--active{% endif %}">{{ childlink.title | escape }}</a>
+            </li>
+            <li>
+              <ul>
+                {% for grand_child_link in linklists[grand_child_list_handle].links %}
+                <li>
+                  <a href="{{ grand_child_link.url }}" class="{% if grand_child_link.active %} pano-nav--active{% endif %}">{{ grand_child_link.title | escape }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+            {% else %}
+            <li>
+              <a href="{{ childlink.url }}" class="{% if childlink.active %} pano-nav--active{% endif %}">{{ childlink.title | escape }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </ul>
+      </li>
+    {% else %}
+      <li class="scene-selector{%- if forloop.first == true %} active{% endif -%}" data-scene-name="{{ link.title | handleize }}">
+        {{ link.title }}
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>

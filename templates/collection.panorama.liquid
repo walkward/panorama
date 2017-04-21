@@ -1,62 +1,27 @@
 {% layout 'panorama' %}
 
-<main>
+<aside>
   <ul id="slide-out" class="side-nav" style="transform: translateX(0px);">
     <li>
       <ul class="tabs">
-        <li class="tab selected"><a href="#catalog">Catalog</a></li>
-        <li class="tab"><a href="#cart">Cart</a></li>
+        <li class="tablinks active tab-rooms" onclick="openTab('tab-rooms')"><a>Rooms</a></li>
+        <li class="tablinks tab-catalog" onclick="openTab('tab-catalog')"><a>Catalog</a></li>
+        <li class="tablinks tab-cart" onclick="openTab('tab-cart')"><a>Cart</a></li>
       </ul>
     </li>
-
+    <!-- This is the rooms navigation -->
+    <div id="tab-rooms" class="tabcontent" style="display:block;">
+      {% include 'panorama-rooms' %}
+    </div>
     <!-- This is the inline catalog -->
-
-    <div id="catalog">
-      {% for product in collection.products limit: product_limit %}
-      <div>
-        <div class="panorama-collection-item">
-          <img src="{{ product.featured_image.src | img_url: 'small' }}" alt="{{ product.featured_image.alt | escape }}">
-        </div>
-        <div class="panorama-collection-item">
-          <p>{{ product.title }}</p>
-          {% for variant in product.variants limit: 1 %}
-            <button id="addToCart" data-cart-add="{{ variant.id }}" class="btn btn--outline btn--small btn--color">Add to Cart</button>
-          {% endfor %}
-        </div>
-      </div>
-      {% endfor %}
+    <div id="tab-catalog" class="tabcontent">
+      {% include 'panorama-catalog' %}
     </div>
-
     <!-- This is the inline cart -->
-
-    <div id="cart" data-cart-view rv-cloak>
-      <div rv-each-item="cart.items">
-        <p>{ item.product_title }</p>
-        <div class="row cart-item">
-          <ul>
-            <li><strong>{ item.line_price | money_with_currency }</strong></li>
-            <li>
-              <div class="quanity_adjust">
-                <a class="adjust" id="minusOne" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#8722;</a>
-                <span class="quantity">{ item.quantity }</span>
-                <a class="adjust" id="plusOne" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <hr>
-      <div>
-        <strong>Total: <span data-cart-view>{ cart.total_price | money_with_currency }</span></strong>
-      </div>
-      <p><a href="/cart" class="button" aria-label="Checkout">Checkout</a></p>
+    <div id="tab-cart" class="tabcontent" data-cart-view rv-cloak>
+      {% include 'panorama-cart' %}
     </div>
+    <!-- Sidebar branding -->
+    <div class="sidebar-logo">{% include "sawder-wide-logo.svg" %}</div>
   </ul>
-</main>
-
-<script type="text/javascript">
-    $('#addToCart, .pnlm-hotspot-base').click(function() {
-      console.log($(this).attr("data-cart-add"));
-      CartJS.addItem($(this).attr("data-cart-add"), 1);
-    });
-</script>
+</aside>

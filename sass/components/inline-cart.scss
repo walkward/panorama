@@ -1,0 +1,48 @@
+#tab-cart {
+  >div {
+    padding: 5px 10px;
+  }
+}
+.cart-item-details {
+  text-align: right;
+  line-height: 33px;
+  height: 33px;
+  margin: 0px;
+  >li {
+    display: inline-block;
+    margin: 0px;
+    svg {
+      vertical-align: text-top;
+      cursor: pointer;
+    }
+    &:not(.cart-item-price) {
+      float: left;
+    }
+  }
+}
+.cart-items-total {
+  font-size: 16px;
+}
+.quanity_adjust {
+  .adjust {
+    cursor: pointer;
+    display: inline-block;
+    width: 33.33333px;
+    height: 33.33333px;
+    vertical-align: middle;
+    line-height: 1.4;
+    text-align: center;
+    font-size: 1.35rem;
+  }
+}
+.sidebar-cart-title {
+  font-size: 16px;
+}
+.clear-all-items {
+  margin: 5px 5px 0 0;
+  clear: both;
+  color: #bbb;
+}
+.inline-checkout-wrapper {
+  padding: 15px 10px !important;
+}

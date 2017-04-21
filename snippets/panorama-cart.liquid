@@ -1,0 +1,27 @@
+<div class="pano-sidebar-item" rv-each-item="cart.items">
+  <div class="sidebar-cart-title">{ item.product_title }</div>
+  <div class="row cart-item">
+    <ul class="cart-item-details">
+      <li>
+        <div class="quanity_adjust">
+          <span>Qty.</span>
+          <a class="adjust" id="minusOne" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">&#8722;</a>
+          <span class="quantity">{ item.quantity }</span>
+          <a class="adjust" id="plusOne" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">&#43;</a>
+        </div>
+      </li>
+      <li class="cart-item-price"><span>{ item.line_price | money_with_currency }</span>
+        <a rv-data-cart-remove-id="item.variant_id">
+          <svg style="width:18px;height:18px" viewBox="0 0 24 24">
+              <path fill="#000000" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="text-right inline-checkout-wrapper">
+  <strong class="left cart-items-total">Total: <span data-cart-view>{ cart.total_price | money_with_currency }</span></strong>
+  <button type="button" name="button" class="btn left clear-all-items" onclick="CartJS.clear();">Clear All</button>
+  <a href="/cart" class="btn btn--outline btn--regular btn--color" aria-label="Checkout">Checkout</a>
+</div>

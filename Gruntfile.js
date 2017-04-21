@@ -1,11 +1,10 @@
 module.exports = function(grunt) {
   // The order of JS files that get loaded
-  var jsBuildFiles = ['scripts/plugins/vendor.js',
-                      'scripts/plugins/lightgallery.js',
+  var jsBuildFiles = [
                       'scripts/plugins/pannellum.js',
                       'scripts/plugins/cart.js',
-                      'scripts/theme.js',
-                      'scripts/lib/*.js'];
+                      'scripts/lib/*.js',
+                      ];
 
   // Project configuration.
   grunt.initConfig({

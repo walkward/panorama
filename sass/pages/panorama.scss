@@ -1,29 +1,3 @@
-.lg-backdrop {
-  z-index: -1;
-}
-
-.lg-outer,
-.lg-sub-html {
-  left: 300px;
-  width: calc(100% - 300px);
-}
-
-.lg-close {
-  display: none;
-}
-
-.lg-outer .lg-video {
-    overflow: visible;
-    padding-bottom: 100%;
-    height: 100%;
-}
-
-.lg-outer .lg-video-cont {
-  padding: 0px;
-  height: 100%;
-}
-
-
 .panorama-wrapper {
     display:inline-block;
     height: 100%;
@@ -42,43 +16,13 @@
   }
 .menu-btn {
   position: absolute;
-  top: 5px;
+  top: 4px;
   left:5px;
+  padding: 1px;
   z-index: 100;
-}
-
-
-.custom-hotspot {
-    height: 50px;
-    width: 50px;
-    background: #f00;
-}
-div.custom-tooltip span {
-    visibility: hidden;
-    position: absolute;
-    border-radius: 3px;
-    background-color: #fff;
-    color: #000;
-    text-align: center;
-    max-width: 200px;
-    padding: 5px 10px;
-    margin-left: -220px;
-    cursor: default;
-}
-div.custom-tooltip:hover span{
-    visibility: visible;
-}
-div.custom-tooltip:hover span:after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-width: 10px;
-    border-style: solid;
-    border-color: #fff transparent transparent transparent;
-    bottom: -20px;
-    left: -10px;
-    margin: 0 50%;
+  width: 26px;
+  height: 26px;
+  background: #fff;
 }
 
 #sidenav-overlay {
