@@ -2,6 +2,7 @@
   display: inline-block;
   vertical-align: top;
   font-size: 16px;
+  position: relative;
   &:last-child {
     width: 200px;
     width: calc(100% - 105px);
@@ -107,4 +108,85 @@
 
 .sidebar-product-title {
   padding: 5px;
+}
+
+.panorama-wrapper {
+  display:inline-block;
+  height: 100%;
+  left: 300px;
+  width: calc(100% - 300px);
+  position: fixed;
+  &.sidenav-closed {
+    left: 0px;
+    width: 100%;
+  }
+  @include at-query ($max, $medium) {
+    left: 0px;
+    width: 100%;
+    &.sidenav-closed {
+      .menu-btn {
+        left: 305px;
+      }
+    }
+  }
+}
+
+#slide-out {
+    &.closed {
+        -webkit-transform: translateX(-100%) !important;
+        transform: translateX(-100%) !important;
+    }
+    @include at-query ($max, $medium) {
+        -webkit-transform: translateX(-100%) !important;
+        transform: translateX(-100%) !important;
+        &.closed {
+          -webkit-transform: translateX(0%) !important;
+          transform: translateX(0%) !important;
+        }
+    }
+}
+
+.menu-btn {
+  position: absolute;
+  top: 4px;
+  left:5px;
+  padding: 1px;
+  z-index: 100;
+  width: 26px;
+  height: 26px;
+  background: #fff;
+}
+
+.prev-scene-arrow,
+.next-scene-arrow {
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    top: calc(50% - 12px);
+}
+
+.prev-scene-arrow {
+  left:5px;
+}
+
+.next-scene-arrow {
+  right: 5px;
+}
+
+.pano-catalog-image {
+  width: 100px;
+  height: 100px;
+  color: #fff;
+}
+
+.pano-catalog-placeholder {
+  position: absolute;
+  -webkit-transform: scale(0.3);
+          transform: scale(0.3);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  z-index: -1;
 }

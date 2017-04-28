@@ -2,8 +2,11 @@ module.exports = function(grunt) {
   // The order of JS files that get loaded
   var jsBuildFiles = [
                       'scripts/plugins/pannellum.js',
+                      'scripts/plugins/throtte-debounce.js',
                       'scripts/plugins/cart.js',
-                      'scripts/lib/*.js',
+                      'scripts/plugins/unveil.js',
+                      'scripts/plugins/imgpreload.js',
+                      'scripts/lib/*.js'
                       ];
 
   // Project configuration.
@@ -67,7 +70,7 @@ module.exports = function(grunt) {
       },
       css: {
         files: ['sass/**/*.sass', 'sass/**/*.scss', ],
-        tasks: ['sass:dev']
+        tasks: ['sass:prod']
       }
     }
   });

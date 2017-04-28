@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="alternate" href="https://www.sawderstudio.com" hreflang="en-us" />
+    {% if settings.favicon != blank %}
+      <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+    {% endif %}
     {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
     {% include 'social-meta-tags' %}
     <link rel="canonical" href="{{ canonical_url }}">
@@ -12,10 +15,6 @@
     <meta name="theme-color" content="{{ settings.color_primary }}">
 
     {{ 'panorama.css' | asset_url | stylesheet_tag }}
-    {{ 'sawderstudio.css' | asset_url | stylesheet_tag }}
-    {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
-
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"> -->
 
     {{ '//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js' | script_tag }}
 
@@ -25,27 +24,27 @@
 
 <body id="page-{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
 
-{{content_for_layout}}
-
 <wrapper class="panorama-wrapper">
   <a href="#" data-activates="slide-out" class="button-collapse menu-btn show-on-large"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#000000" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg></a>
+  <a href="#" class="prev-scene-arrow"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#fff" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" /></svg></a>
+  <a href="#" class="next-scene-arrow"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#fff" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg></a>
   <div id="panorama"></div>
 </wrapper>
 
-{{ 'option_selection.js' | shopify_asset_url | script_tag }}
-{{ 'panorama.js' | asset_url | script_tag }}
+{{content_for_layout}}
+
+<script type="text/javascript" src="{{ 'panorama.js' | asset_url }}"></script>
 
 <script>
-viewer = pannellum.viewer('panorama', {
+var panoOptions = {
     "default": {
-        "firstScene": "{%- for link in linklists['panorama'].links limit: 1 -%}{{- link.title | handleize -}}{% endfor %}",
+        "firstScene": "{%- for link in linklists['styles'].links limit: 1 -%}{{- link.title | handleize -}}{% endfor %}",
         "autoLoad": true,
-        "hotSpotDebug": true,
-        "sceneFadeDuration": 1000
+        //"hotSpotDebug": true,
+        "sceneFadeDuration": 300
     },
-
     "scenes": {
-        {%- for link in linklists['panorama'].links -%}
+        {%- for link in linklists['styles'].links -%}
         {%- assign link_handle = link.title | handleize -%}
         {%- assign collection = collections.[link_handle] -%}
         "{{- link_handle -}}": {
@@ -53,7 +52,8 @@ viewer = pannellum.viewer('panorama', {
             "pitch": -3,
             "yaw": 117,
             "type": "equirectangular",
-            "panorama": "{%- if collection.image -%}{{- collection.image.src | img_url: 'master', scale: 2, format: 'pjpg' | split:'?' | first -}}{%- endif -%}",
+            "panorama": "{%- if collection.image -%}{{- collection.image.src | img_url: 'master', format: 'pjpg' | split:'?' | first -}}{%- endif -%}",
+            "mobilePanorama": "{%- if collection.image -%}{{- collection.image.src | img_url: '2000x1000', format: 'pjpg' | split:'?' | first -}}{%- endif -%}",
             "hotSpots": [
                     {%- for product in collections.[link_handle].products -%}
                     {
@@ -76,60 +76,36 @@ viewer = pannellum.viewer('panorama', {
             ]}{%- unless forloop.last -%},{%- endunless -%}
         {%- endfor -%}
     }
-});
-
-
-// Hot spot creation function
-function hotspot(hotSpotDiv, args) {
-    hotSpotDiv.classList.add('custom-tooltip');
-    var span = document.createElement('span');
-    span.innerHTML = '<span>' + args.title + '</span>';
-    hotSpotDiv.appendChild(span);
-    var img = document.createElement('img');
-    img.src = args.image_src;
-    span.insertBefore(img, span.firstChild );
-    var viewBtn = document.createElement('a');
-    viewBtn.setAttribute('data-view-product', args.variantID);
-    viewBtn.innerHTML = "View";
-    span.insertBefore(viewBtn, span.firstChild );
-    var buyBtn = document.createElement('a');
-    buyBtn.setAttribute('data-addtocart', args.variantID);
-    buyBtn.innerHTML = "Buy Now";
-    span.insertBefore(buyBtn, span.firstChild );
-    span.style.marginLeft = -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + 'px';
-    span.style.marginTop = -span.scrollHeight + 'px';
-}
-function hotspotClick(hotSpotDiv, args) {
-  var addToCartId = hotSpotDiv.srcElement.getAttribute("data-addtocart");
-  console.log("hotSpotDiv.srcElement")
-  var productId = hotSpotDiv.srcElement.getAttribute("data-view-product");
-  if (productId) {
-    document.getElementById("product-"+productId).style.backgroundColor = "#f4f4f4";
-    openTab("tab-catalog");
-    setTimeout(function(){
-      document.getElementById("product-"+productId).style.backgroundColor = "#fff"; },
-    1000);
-  } else if (addToCartId) {
-    CartJS.addItem(addToCartId, 1);
-    openTab("tab-cart");
+};
+if(Math.max(document.documentElement.clientWidth, window.innerWidth || 0) < 768){
+  var allScenes = panoOptions.scenes;
+  for (var key in allScenes) {
+    if (allScenes.hasOwnProperty(key)) {
+      allScenes[key].panorama = allScenes[key].mobilePanorama;
+      console.log(allScenes[key].panorama);
+    }
   }
-}
-
-$("[data-view-product]").click(function(){
-  console.log("i heard you");
-  openTab("tab-catalog");
+};
+viewer = pannellum.viewer('panorama', panoOptions);
+viewer.on("load", function(event) {
+  var viewerConfig = viewer.getConfig();
+  var imageSrcs = [];
+  $.each(viewerConfig.scenes, function() {
+      imageSrcs.push(this.panorama);
+  });
+  $.fn.preload = function() {
+      this.each(function(){
+          $('<img/>')[0].src = this;
+      });
+  }
+  $(imageSrcs).preload( function(){
+    viewer.off();
+  });
 });
 </script>
 
-<script>
-// initialize cart.js
-$(function() {
-    CartJS.init({{ cart | json }}, {
-        rivetsModels: {
-            "customer": {{ customer | json }}
-        }
-    });
-});
+<script type="text/javascript">
+jQuery(function(){CartJS.init({{ cart | json }})});
 </script>
 
 </body>

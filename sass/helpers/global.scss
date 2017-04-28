@@ -1,0 +1,83 @@
+#faqs .site-footer,
+.white {
+    background: #fff !Important;
+    background-color: #fff !Important;
+}
+
+.template-collection .site-footer > .white {
+    background: transparent !Important;
+    background-color: transparent !Important;
+}
+
+.window-loaded #header-wrapper {
+    opacity: 1 !Important;
+}
+
+.bottom-margin,
+.wrapper.bottom-margin {
+    margin-bottom: 60px !important;
+    @include at-query($max, $desktop) {
+        margin-bottom: 40px;
+    }
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.left {
+    float: left !important;
+}
+
+.right {
+    float: right !important;
+}
+
+.center {
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+iframe,
+img {
+    max-width: 100%;
+}
+
+img {
+    border: 0 none;
+    height: auto;
+    vertical-align: bottom;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.clear {
+    clear: both;
+}
+
+button {
+    background: none;
+    border: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+button,
+input[type="submit"] {
+    cursor: pointer;
+}

@@ -1,0 +1,103 @@
+.btn {
+    font-family: "dincomp";
+    border-radius: 1px;
+    display: inline-block;
+}
+
+.btn.btn--small {
+    font-size: 0.92857em;
+    height: 35px;
+    line-height: 33px;
+    padding: 0 20px;
+}
+
+.btn.btn--regular {
+    font-size: 1.14286em;
+    height: 50px;
+    line-height: 48px;
+    padding: 0 30px;
+}
+@media screen and (max-width: 480px) {
+    .btn.btn--regular:not([type="submit"]) {
+        font-size: 0.92857em;
+        height: 42px;
+        line-height: 40px;
+        padding: 0 20px;
+    }
+}
+
+.btn.btn--large {
+    font-size: 1.14286em;
+    height: 60px;
+    line-height: 58px;
+    padding: 0 34px;
+}
+@media screen and (max-width: 480px) {
+    .btn.btn--large:not([type="submit"]) {
+        font-size: 1.07143em;
+        height: 50px;
+        line-height: 48px;
+        padding: 0 30px;
+    }
+}
+
+.btn.btn--outline {
+    background: transparent;
+    border: 2px solid;
+}
+
+.btn.btn--outline.btn--color {
+    color: #222;
+    border-color: #222;
+}
+
+.btn.btn--outline.btn--color:hover {
+    color: #adc99c;
+    border-color: #adc99c;
+}
+
+.btn.btn--outline.btn--dark {
+    color: #222;
+    border-color: #222;
+}
+
+.btn.btn--outline.btn--dark:hover {
+    background: #222;
+}
+
+.btn.btn--outline.btn--light {
+    color: #fff;
+    border-color: #fff;
+}
+
+.btn.btn--outline.btn--light:hover {
+    background: #fff;
+    color: #000 !important;
+}
+
+.btn.btn--outline:hover {
+    color: #fff;
+}
+
+.btn.btn--fill {
+    color: #fff;
+    top: -1px;
+    position: relative;
+    border: none;
+}
+
+.btn.btn--fill.btn--color {
+    background: #adc99c;
+}
+
+.btn.btn--fill.btn--color:hover {
+    background: #92b77b;
+}
+
+.btn.btn--fill.btn--dark {
+    background: #222;
+}
+
+.btn.btn--fill.btn--dark:hover {
+    background: #090909;
+}
